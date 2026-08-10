@@ -218,3 +218,4 @@ The scraper has been refactored to prioritize **stable, semantic selectors** ove
   - Place metadata (name, address, phone, website, etc.)
 - **Reviews URL deprecated**: The `reviews_url` field returns a URL that no longer works (404 error) as of 2026
 - For alternatives, consider using Google's official Places API for review access (requires API key and has usage costs)
+# google-map-scraper

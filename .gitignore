@@ -55,3 +55,6 @@ Thumbs.db
 # Test files
 test_*.html
 sample_*.html
+
+# Obsidian
+obsidian_vault/

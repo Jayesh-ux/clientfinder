@@ -57,4 +57,15 @@ test_*.html
 sample_*.html
 
 # Obsidian
-obsidian_vault/
+docs/.obsidian/
+
+# Scratch folder (contains local credentials, API keys, sessions, dependencies, and temporary data)
+scratch/
+
+# Database files & lead data
+pipeline/crm.db
+pipeline/*.csv
+pipeline/queue_tracker.json
+
+# Tool generated outputs
+graphify-out/

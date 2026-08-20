@@ -1,0 +1,2688 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "extractor.py",
+      "x": 0,
+      "y": 0,
+      "width": 1540,
+      "height": 720,
+      "color": "1"
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_178",
+      "type": "file",
+      "file": "Constructs the reviews URL using the internal Place ID (CID). DEPRECATED\u2026.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_301",
+      "type": "file",
+      "file": "Extracts and standardizes the primary phone number from HTML..md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_395",
+      "type": "file",
+      "file": "Extracts business hours from HTML..md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_194",
+      "type": "file",
+      "file": "Extracts latitude and longitude..md",
+      "x": 620,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_158",
+      "type": "file",
+      "file": "Extracts the Google Place ID..md",
+      "x": 820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_43",
+      "type": "file",
+      "file": "Extracts the JSON string assigned to window.APP_INITIALIZATION_STATE from HTML\u2026.md",
+      "x": 1020,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_233",
+      "type": "file",
+      "file": "Extracts the average star rating from HTML..md",
+      "x": 1220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_212",
+      "type": "file",
+      "file": "Extracts the complete address from HTML..md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_168",
+      "type": "file",
+      "file": "Extracts the internal Google Place ID (CID) for reviews URL..md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_323",
+      "type": "file",
+      "file": "Extracts the list of categoriestypes from HTML..md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_135",
+      "type": "file",
+      "file": "Extracts the main name of the place from HTML or metadata..md",
+      "x": 620,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_374",
+      "type": "file",
+      "file": "Extracts the main thumbnail image URL from HTML..md",
+      "x": 820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_278",
+      "type": "file",
+      "file": "Extracts the primary website link from HTML..md",
+      "x": 1020,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_255",
+      "type": "file",
+      "file": "Extracts the total number of reviews from HTML..md",
+      "x": 1220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_1",
+      "type": "file",
+      "file": "Google Maps Data Extractor This module extracts place data from Google Maps\u2026.md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_112",
+      "type": "file",
+      "file": "Helper function to extract data from HTML using regex..md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_422",
+      "type": "file",
+      "file": "High-level function to orchestrate extraction from HTML content. Updated to\u2026.md",
+      "x": 420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_64",
+      "type": "file",
+      "file": "Parses the extracted JSON string to get basic metadata. Returns a dict with\u2026.md",
+      "x": 620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_rationale_123",
+      "type": "file",
+      "file": "Remove HTML tags and clean up text..md",
+      "x": 820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "type": "file",
+      "file": "clean_html_text().md",
+      "x": 1020,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "type": "file",
+      "file": "extract_from_html().md",
+      "x": 1220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_extract_initial_json",
+      "type": "file",
+      "file": "extract_initial_json().md",
+      "x": 20,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "type": "file",
+      "file": "extract_place_data().md",
+      "x": 220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor",
+      "type": "file",
+      "file": "extractor.py.md",
+      "x": 420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_categories",
+      "type": "file",
+      "file": "get_categories().md",
+      "x": 620,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "type": "file",
+      "file": "get_complete_address().md",
+      "x": 820,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "type": "file",
+      "file": "get_gps_coordinates().md",
+      "x": 1020,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_hours",
+      "type": "file",
+      "file": "get_hours().md",
+      "x": 1220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_main_name",
+      "type": "file",
+      "file": "get_main_name().md",
+      "x": 20,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "type": "file",
+      "file": "get_phone_number().md",
+      "x": 220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_place_id",
+      "type": "file",
+      "file": "get_place_id().md",
+      "x": 420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_place_id_cid",
+      "type": "file",
+      "file": "get_place_id_cid().md",
+      "x": 620,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_rating",
+      "type": "file",
+      "file": "get_rating().md",
+      "x": 820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_reviews_count",
+      "type": "file",
+      "file": "get_reviews_count().md",
+      "x": 1020,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_reviews_url",
+      "type": "file",
+      "file": "get_reviews_url().md",
+      "x": 1220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_thumbnail",
+      "type": "file",
+      "file": "get_thumbnail().md",
+      "x": 20,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_get_website",
+      "type": "file",
+      "file": "get_website().md",
+      "x": 220,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_extractor_parse_json_data",
+      "type": "file",
+      "file": "parse_json_data().md",
+      "x": 420,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "orchestrate_campaign.js",
+      "x": 1620,
+      "y": 0,
+      "width": 1100,
+      "height": 520,
+      "color": "2"
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_analyzedfilepath",
+      "type": "file",
+      "file": "analyzedFilePath.md",
+      "x": 1640,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_args",
+      "type": "file",
+      "file": "args.md",
+      "x": 1840,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_dotenv",
+      "type": "file",
+      "file": "dotenv.md",
+      "x": 2040,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_downloadvoicenote",
+      "type": "file",
+      "file": "downloadVoiceNote().md",
+      "x": 2240,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_fs",
+      "type": "file",
+      "file": "fs.md",
+      "x": 2440,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_getchathistory",
+      "type": "file",
+      "file": "getChatHistory().md",
+      "x": 1640,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_getgeminireply",
+      "type": "file",
+      "file": "getGeminiReply().md",
+      "x": 1840,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_historyfilepath",
+      "type": "file",
+      "file": "historyFilePath.md",
+      "x": 2040,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign",
+      "type": "file",
+      "file": "orchestrate_campaign.js.md",
+      "x": 2240,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_path",
+      "type": "file",
+      "file": "path.md",
+      "x": 2440,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_qrcode",
+      "type": "file",
+      "file": "qrcode.md",
+      "x": 1640,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_runcampaign",
+      "type": "file",
+      "file": "runCampaign().md",
+      "x": 1840,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_savechathistory",
+      "type": "file",
+      "file": "saveChatHistory().md",
+      "x": 2040,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_scrapedfilepath",
+      "type": "file",
+      "file": "scrapedFilePath.md",
+      "x": 2240,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_sleep",
+      "type": "file",
+      "file": "sleep().md",
+      "x": 2440,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_client_localauth_messagemedia",
+      "type": "file",
+      "file": "{ Client, LocalAuth, MessageMedia }.md",
+      "x": 1640,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_orchestrate_campaign_execsync",
+      "type": "file",
+      "file": "{ execSync }.md",
+      "x": 1840,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "scrape_google_maps",
+      "x": 2800,
+      "y": 0,
+      "width": 880,
+      "height": 520,
+      "color": "3"
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_rationale_35",
+      "type": "file",
+      "file": "Creates a Google Maps search URL..md",
+      "x": 2820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_rationale_30",
+      "type": "file",
+      "file": "Returns random delay for anti-detection.md",
+      "x": 3020,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_rationale_87",
+      "type": "file",
+      "file": "Scrapes Google Maps for places based on a query. Args query (str) The search\u2026.md",
+      "x": 3220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_rationale_42",
+      "type": "file",
+      "file": "Scrapes details for a single place using a new page from the browser context.\u2026.md",
+      "x": 3420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_init",
+      "type": "file",
+      "file": "__init__.py.md",
+      "x": 2820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_create_search_url",
+      "type": "file",
+      "file": "create_search_url().md",
+      "x": 3020,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_scrape_leads_main",
+      "type": "file",
+      "file": "main().md",
+      "x": 3220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_search_clients_main",
+      "type": "file",
+      "file": "main()_1.md",
+      "x": 3420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_search_more_clients_main",
+      "type": "file",
+      "file": "main()_2.md",
+      "x": 2820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_random_delay",
+      "type": "file",
+      "file": "random_delay().md",
+      "x": 3020,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "type": "file",
+      "file": "scrape_google_maps().md",
+      "x": 3220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_scrape_leads",
+      "type": "file",
+      "file": "scrape_leads.py.md",
+      "x": 3420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "type": "file",
+      "file": "scrape_place_details().md",
+      "x": 2820,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_scraper",
+      "type": "file",
+      "file": "scraper.py.md",
+      "x": 3020,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_search_clients",
+      "type": "file",
+      "file": "search_clients.py.md",
+      "x": 3220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_search_more_clients",
+      "type": "file",
+      "file": "search_more_clients.py.md",
+      "x": 3420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "whatsapp_sales_bot.js",
+      "x": 3760,
+      "y": 0,
+      "width": 880,
+      "height": 520,
+      "color": "4"
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_client",
+      "type": "file",
+      "file": "client_1.md",
+      "x": 3780,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_dotenv",
+      "type": "file",
+      "file": "dotenv_2.md",
+      "x": 3980,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_downloadvoicenote",
+      "type": "file",
+      "file": "downloadVoiceNote()_1.md",
+      "x": 4180,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_fs",
+      "type": "file",
+      "file": "fs_1.md",
+      "x": 4380,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_getchathistory",
+      "type": "file",
+      "file": "getChatHistory()_1.md",
+      "x": 3780,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_getgeminireply",
+      "type": "file",
+      "file": "getGeminiReply()_1.md",
+      "x": 3980,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_historyfilepath",
+      "type": "file",
+      "file": "historyFilePath_1.md",
+      "x": 4180,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_path",
+      "type": "file",
+      "file": "path_2.md",
+      "x": 4380,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_qrcode",
+      "type": "file",
+      "file": "qrcode_2.md",
+      "x": 3780,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_savechathistory",
+      "type": "file",
+      "file": "saveChatHistory()_1.md",
+      "x": 3980,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot",
+      "type": "file",
+      "file": "whatsapp_sales_bot.js.md",
+      "x": 4180,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_client_localauth_messagemedia",
+      "type": "file",
+      "file": "{ Client, LocalAuth, MessageMedia }_1.md",
+      "x": 4380,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sales_bot_execsync",
+      "type": "file",
+      "file": "{ execSync }_1.md",
+      "x": 3780,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "dependencies",
+      "x": 0,
+      "y": 800,
+      "width": 880,
+      "height": 420,
+      "color": "5"
+    },
+    {
+      "id": "n_scratch_package_dependencies",
+      "type": "file",
+      "file": "dependencies.md",
+      "x": 20,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_dotenv",
+      "type": "file",
+      "file": "dotenv_4.md",
+      "x": 220,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_package_dependencies_dotenv",
+      "type": "file",
+      "file": "dotenv_3.md",
+      "x": 420,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_fluent_ffmpeg",
+      "type": "file",
+      "file": "fluent-ffmpeg_1.md",
+      "x": 620,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_package_dependencies_fluent_ffmpeg",
+      "type": "file",
+      "file": "fluent-ffmpeg.md",
+      "x": 20,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_package",
+      "type": "file",
+      "file": "package.json.md",
+      "x": 220,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_qrcode_terminal",
+      "type": "file",
+      "file": "qrcode-terminal_1.md",
+      "x": 420,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_package_dependencies_qrcode_terminal",
+      "type": "file",
+      "file": "qrcode-terminal.md",
+      "x": 620,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_package_dependencies_whatsapp_web_js",
+      "type": "file",
+      "file": "whatsapp-web.js.md",
+      "x": 20,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_whatsapp_web_js",
+      "type": "file",
+      "file": "whatsapp-web.js_1.md",
+      "x": 220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "whatsapp_bulk_outreach.js",
+      "x": 1620,
+      "y": 800,
+      "width": 880,
+      "height": 420,
+      "color": "6"
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_client",
+      "type": "file",
+      "file": "client_2.md",
+      "x": 1640,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_dotenv",
+      "type": "file",
+      "file": "dotenv_5.md",
+      "x": 1840,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_fs",
+      "type": "file",
+      "file": "fs_2.md",
+      "x": 2040,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_leads",
+      "type": "file",
+      "file": "leads.md",
+      "x": 2240,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_leadspath",
+      "type": "file",
+      "file": "leadsPath.md",
+      "x": 1640,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_path",
+      "type": "file",
+      "file": "path_3.md",
+      "x": 1840,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_qrcode",
+      "type": "file",
+      "file": "qrcode_3.md",
+      "x": 2040,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_sleep",
+      "type": "file",
+      "file": "sleep()_1.md",
+      "x": 2240,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach",
+      "type": "file",
+      "file": "whatsapp_bulk_outreach.js.md",
+      "x": 1640,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_bulk_outreach_client_localauth",
+      "type": "file",
+      "file": "{ Client, LocalAuth }_1.md",
+      "x": 1840,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "main_api.py",
+      "x": 2800,
+      "y": 800,
+      "width": 660,
+      "height": 420,
+      "color": "1"
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_rationale_73",
+      "type": "file",
+      "file": "Triggers the Google Maps scraping process for the given query via GET request..md",
+      "x": 2820,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_rationale_33",
+      "type": "file",
+      "file": "Triggers the Google Maps scraping process for the given query..md",
+      "x": 3020,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_get",
+      "type": "file",
+      "file": "get.md",
+      "x": 3220,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api",
+      "type": "file",
+      "file": "main_api.py.md",
+      "x": 2820,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_post",
+      "type": "file",
+      "file": "post.md",
+      "x": 3020,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_read_root",
+      "type": "file",
+      "file": "read_root().md",
+      "x": 3220,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_run_scrape",
+      "type": "file",
+      "file": "run_scrape().md",
+      "x": 2820,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_run_scrape_get",
+      "type": "file",
+      "file": "run_scrape_get().md",
+      "x": 3020,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_gmaps_scraper_server_main_api_scrape_google_maps",
+      "type": "file",
+      "file": "scrape_google_maps()_1.md",
+      "x": 3220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g7",
+      "type": "group",
+      "label": "lead_analyzer.js",
+      "x": 3760,
+      "y": 800,
+      "width": 660,
+      "height": 420,
+      "color": "2"
+    },
+    {
+      "id": "n_scratch_lead_analyzer_args",
+      "type": "file",
+      "file": "args_1.md",
+      "x": 3780,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_dotenv",
+      "type": "file",
+      "file": "dotenv_6.md",
+      "x": 3980,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_fs",
+      "type": "file",
+      "file": "fs_3.md",
+      "x": 4180,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_generatepitch",
+      "type": "file",
+      "file": "generatePitch().md",
+      "x": 3780,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer",
+      "type": "file",
+      "file": "lead_analyzer.js.md",
+      "x": 3980,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_path",
+      "type": "file",
+      "file": "path_4.md",
+      "x": 4180,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_run",
+      "type": "file",
+      "file": "run().md",
+      "x": 3780,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_lead_analyzer_sleep",
+      "type": "file",
+      "file": "sleep()_2.md",
+      "x": 3980,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g8",
+      "type": "group",
+      "label": "merge_final_leads.js",
+      "x": 0,
+      "y": 1300,
+      "width": 660,
+      "height": 420,
+      "color": "3"
+    },
+    {
+      "id": "n_scratch_merge_final_leads_combinedanalyzedpath",
+      "type": "file",
+      "file": "combinedAnalyzedPath.md",
+      "x": 20,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads_dentalindiranagarpath",
+      "type": "file",
+      "file": "dentalIndiranagarPath.md",
+      "x": 220,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads_fs",
+      "type": "file",
+      "file": "fs_4.md",
+      "x": 420,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads_hsranalyzedpath",
+      "type": "file",
+      "file": "hsrAnalyzedPath.md",
+      "x": 20,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads",
+      "type": "file",
+      "file": "merge_final_leads.js.md",
+      "x": 220,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads_path",
+      "type": "file",
+      "file": "path_5.md",
+      "x": 420,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_merge_final_leads_processlist",
+      "type": "file",
+      "file": "processList().md",
+      "x": 20,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g9",
+      "type": "group",
+      "label": "combine_scrapes.js",
+      "x": 1620,
+      "y": 1300,
+      "width": 660,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_scratch_combine_scrapes_allleads",
+      "type": "file",
+      "file": "allLeads.md",
+      "x": 1640,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_combine_scrapes",
+      "type": "file",
+      "file": "combine_scrapes.js.md",
+      "x": 1840,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_combine_scrapes_files",
+      "type": "file",
+      "file": "files.md",
+      "x": 2040,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_combine_scrapes_fs",
+      "type": "file",
+      "file": "fs_5.md",
+      "x": 1640,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_combine_scrapes_path",
+      "type": "file",
+      "file": "path_6.md",
+      "x": 1840,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_combine_scrapes_seenphones",
+      "type": "file",
+      "file": "seenPhones.md",
+      "x": 2040,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g10",
+      "type": "group",
+      "label": "whatsapp_sender.js",
+      "x": 2800,
+      "y": 1300,
+      "width": 660,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_scratch_whatsapp_sender_client",
+      "type": "file",
+      "file": "client.md",
+      "x": 2820,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sender_dotenv",
+      "type": "file",
+      "file": "dotenv_1.md",
+      "x": 3020,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sender_path",
+      "type": "file",
+      "file": "path_1.md",
+      "x": 3220,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sender_qrcode",
+      "type": "file",
+      "file": "qrcode_1.md",
+      "x": 2820,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sender",
+      "type": "file",
+      "file": "whatsapp_sender.js.md",
+      "x": 3020,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_whatsapp_sender_client_localauth",
+      "type": "file",
+      "file": "{ Client, LocalAuth }.md",
+      "x": 3220,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g11",
+      "type": "group",
+      "label": "9.70.0/manifest.json",
+      "x": 3760,
+      "y": 1300,
+      "width": 660,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest",
+      "type": "file",
+      "file": "9.70.0manifest.json.md",
+      "x": 3780,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_manifest_version",
+      "type": "file",
+      "file": "manifest_version.md",
+      "x": 3980,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_name",
+      "type": "file",
+      "file": "name.md",
+      "x": 4180,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_ruleset_format",
+      "type": "file",
+      "file": "ruleset_format.md",
+      "x": 3780,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_version",
+      "type": "file",
+      "file": "version.md",
+      "x": 3980,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g12",
+      "type": "group",
+      "label": "10676/manifest.json",
+      "x": 0,
+      "y": 1800,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest",
+      "type": "file",
+      "file": "10676manifest.json.md",
+      "x": 20,
+      "y": 1880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_manifest_version",
+      "type": "file",
+      "file": "manifest_version_1.md",
+      "x": 220,
+      "y": 1880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_name",
+      "type": "file",
+      "file": "name_1.md",
+      "x": 20,
+      "y": 1960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_version",
+      "type": "file",
+      "file": "version_1.md",
+      "x": 220,
+      "y": 1960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g13",
+      "type": "group",
+      "label": "init_db.py",
+      "x": 1620,
+      "y": 1800,
+      "width": 600,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_pipeline_init_db_init_db",
+      "type": "file",
+      "file": "init_db().md",
+      "x": 1640,
+      "y": 1880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_pipeline_init_db",
+      "type": "file",
+      "file": "init_db.py.md",
+      "x": 1840,
+      "y": 1880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g14",
+      "type": "group",
+      "label": "setup.py",
+      "x": 2800,
+      "y": 1800,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_setup",
+      "type": "file",
+      "file": "setup.py.md",
+      "x": 2820,
+      "y": 1880,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_categories",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_categories",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_complete_address",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_hours",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_hours",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_main_name",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_main_name",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_phone_number",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_get_website",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_get_website",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_clean_html_text_gmaps_scraper_server_extractor_rationale_123",
+      "fromNode": "n_gmaps_scraper_server_extractor_clean_html_text",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_123",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_complete_address",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_hours",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_hours",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_main_name",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_main_name",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_phone_number",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_place_id",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_place_id",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_place_id_cid",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_place_id_cid",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_rating",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_rating",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_reviews_count",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_reviews_count",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_thumbnail",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_thumbnail",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_get_website",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_get_website",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_from_html_gmaps_scraper_server_extractor_rationale_112",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_from_html",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_112",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_initial_json_gmaps_scraper_server_extractor_extract_place_data",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_initial_json",
+      "toNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_initial_json_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_initial_json",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_initial_json_gmaps_scraper_server_extractor_rationale_43",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_initial_json",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_43",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_parse_json_data",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_parse_json_data",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_main_name",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_main_name",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_place_id",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_place_id",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_complete_address",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_rating",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_rating",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_reviews_count",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_reviews_count",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_reviews_url",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_reviews_url",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_categories",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_categories",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_website",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_website",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_phone_number",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_thumbnail",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_thumbnail",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_get_hours",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_get_hours",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_scraper_scrape_place_details",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_extract_place_data_gmaps_scraper_server_extractor_rationale_422",
+      "fromNode": "n_gmaps_scraper_server_extractor_extract_place_data",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_422",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_categories_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_categories",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_categories_gmaps_scraper_server_extractor_rationale_323",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_categories",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_323",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_complete_address_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_complete_address_gmaps_scraper_server_extractor_rationale_212",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_complete_address",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_212",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_gps_coordinates_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_gps_coordinates_gmaps_scraper_server_extractor_rationale_194",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_gps_coordinates",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_194",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_hours_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_hours",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_hours_gmaps_scraper_server_extractor_rationale_395",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_hours",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_395",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_main_name_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_main_name",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_main_name_gmaps_scraper_server_extractor_rationale_135",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_main_name",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_135",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_phone_number_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_phone_number_gmaps_scraper_server_extractor_rationale_301",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_phone_number",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_301",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_place_id_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_place_id",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_place_id_gmaps_scraper_server_extractor_rationale_158",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_place_id",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_158",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_place_id_cid_gmaps_scraper_server_extractor_get_reviews_url",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_place_id_cid",
+      "toNode": "n_gmaps_scraper_server_extractor_get_reviews_url",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_place_id_cid_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_place_id_cid",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_place_id_cid_gmaps_scraper_server_extractor_rationale_168",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_place_id_cid",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_168",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_rating_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_rating",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_rating_gmaps_scraper_server_extractor_rationale_233",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_rating",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_233",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_reviews_count_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_reviews_count",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_reviews_count_gmaps_scraper_server_extractor_rationale_255",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_reviews_count",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_255",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_reviews_url_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_reviews_url",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_reviews_url_gmaps_scraper_server_extractor_rationale_178",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_reviews_url",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_178",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_thumbnail_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_thumbnail",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_thumbnail_gmaps_scraper_server_extractor_rationale_374",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_thumbnail",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_374",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_website_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_website",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_get_website_gmaps_scraper_server_extractor_rationale_278",
+      "fromNode": "n_gmaps_scraper_server_extractor_get_website",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_278",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_parse_json_data_gmaps_scraper_server_extractor",
+      "fromNode": "n_gmaps_scraper_server_extractor_parse_json_data",
+      "toNode": "n_gmaps_scraper_server_extractor",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_parse_json_data_gmaps_scraper_server_extractor_rationale_64",
+      "fromNode": "n_gmaps_scraper_server_extractor_parse_json_data",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_64",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_downloadvoicenote_scratch_orchestrate_campaign_runcampaign",
+      "fromNode": "n_scratch_orchestrate_campaign_downloadvoicenote",
+      "toNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_downloadvoicenote_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_downloadvoicenote",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_getchathistory_scratch_orchestrate_campaign_runcampaign",
+      "fromNode": "n_scratch_orchestrate_campaign_getchathistory",
+      "toNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_getchathistory_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_getchathistory",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_getgeminireply_scratch_orchestrate_campaign_sleep",
+      "fromNode": "n_scratch_orchestrate_campaign_getgeminireply",
+      "toNode": "n_scratch_orchestrate_campaign_sleep",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_getgeminireply_scratch_orchestrate_campaign_runcampaign",
+      "fromNode": "n_scratch_orchestrate_campaign_getgeminireply",
+      "toNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_getgeminireply_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_getgeminireply",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_runcampaign_scratch_orchestrate_campaign_sleep",
+      "fromNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "toNode": "n_scratch_orchestrate_campaign_sleep",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_runcampaign_scratch_orchestrate_campaign_savechathistory",
+      "fromNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "toNode": "n_scratch_orchestrate_campaign_savechathistory",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_runcampaign_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_runcampaign",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_savechathistory_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_savechathistory",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_sleep_scratch_orchestrate_campaign",
+      "fromNode": "n_scratch_orchestrate_campaign_sleep",
+      "toNode": "n_scratch_orchestrate_campaign",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_pipeline_init_db_init_db_pipeline_init_db",
+      "fromNode": "n_pipeline_init_db_init_db",
+      "toNode": "n_pipeline_init_db",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_create_search_url_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_scraper_create_search_url",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_create_search_url_gmaps_scraper_server_scraper_rationale_35",
+      "fromNode": "n_gmaps_scraper_server_scraper_create_search_url",
+      "toNode": "n_gmaps_scraper_server_scraper_rationale_35",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_random_delay_gmaps_scraper_server_scraper_scrape_google_maps",
+      "fromNode": "n_gmaps_scraper_server_scraper_random_delay",
+      "toNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_random_delay_gmaps_scraper_server_scraper_scrape_place_details",
+      "fromNode": "n_gmaps_scraper_server_scraper_random_delay",
+      "toNode": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_random_delay_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_scraper_random_delay",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_random_delay_gmaps_scraper_server_scraper_rationale_30",
+      "fromNode": "n_gmaps_scraper_server_scraper_random_delay",
+      "toNode": "n_gmaps_scraper_server_scraper_rationale_30",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_gmaps_scraper_server_scraper_scrape_place_details",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_scrape_leads_main",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_scrape_leads_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_search_clients_main",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_search_clients_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_search_more_clients_main",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_search_more_clients_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_scrape_leads",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_scrape_leads",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_search_clients",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_search_clients",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_scratch_search_more_clients",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_scratch_search_more_clients",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_google_maps_gmaps_scraper_server_scraper_rationale_87",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_google_maps",
+      "toNode": "n_gmaps_scraper_server_scraper_rationale_87",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_place_details_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scrape_place_details_gmaps_scraper_server_scraper_rationale_42",
+      "fromNode": "n_gmaps_scraper_server_scraper_scrape_place_details",
+      "toNode": "n_gmaps_scraper_server_scraper_rationale_42",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_scrape_leads_main_scratch_scrape_leads",
+      "fromNode": "n_scratch_scrape_leads_main",
+      "toNode": "n_scratch_scrape_leads",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_search_clients_main_scratch_search_clients",
+      "fromNode": "n_scratch_search_clients_main",
+      "toNode": "n_scratch_search_clients",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_search_more_clients_main_scratch_search_more_clients",
+      "fromNode": "n_scratch_search_more_clients_main",
+      "toNode": "n_scratch_search_more_clients",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_downloadvoicenote_scratch_whatsapp_sales_bot",
+      "fromNode": "n_scratch_whatsapp_sales_bot_downloadvoicenote",
+      "toNode": "n_scratch_whatsapp_sales_bot",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_getchathistory_scratch_whatsapp_sales_bot",
+      "fromNode": "n_scratch_whatsapp_sales_bot_getchathistory",
+      "toNode": "n_scratch_whatsapp_sales_bot",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_getgeminireply_scratch_whatsapp_sales_bot",
+      "fromNode": "n_scratch_whatsapp_sales_bot_getgeminireply",
+      "toNode": "n_scratch_whatsapp_sales_bot",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_savechathistory_scratch_whatsapp_sales_bot",
+      "fromNode": "n_scratch_whatsapp_sales_bot_savechathistory",
+      "toNode": "n_scratch_whatsapp_sales_bot",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_sleep_scratch_whatsapp_bulk_outreach",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach_sleep",
+      "toNode": "n_scratch_whatsapp_bulk_outreach",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_read_root_get",
+      "fromNode": "n_gmaps_scraper_server_main_api_read_root",
+      "toNode": "n_get",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_read_root_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_main_api_read_root",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_gmaps_scraper_server_main_api_scrape_google_maps",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape",
+      "toNode": "n_gmaps_scraper_server_main_api_scrape_google_maps",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_post",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape",
+      "toNode": "n_post",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_gmaps_scraper_server_main_api_rationale_33",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape",
+      "toNode": "n_gmaps_scraper_server_main_api_rationale_33",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_get_gmaps_scraper_server_main_api_scrape_google_maps",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape_get",
+      "toNode": "n_gmaps_scraper_server_main_api_scrape_google_maps",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_get_get",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape_get",
+      "toNode": "n_get",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_get_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape_get",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_run_scrape_get_gmaps_scraper_server_main_api_rationale_73",
+      "fromNode": "n_gmaps_scraper_server_main_api_run_scrape_get",
+      "toNode": "n_gmaps_scraper_server_main_api_rationale_73",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_main_api_scrape_google_maps_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_main_api_scrape_google_maps",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_generatepitch_scratch_lead_analyzer_sleep",
+      "fromNode": "n_scratch_lead_analyzer_generatepitch",
+      "toNode": "n_scratch_lead_analyzer_sleep",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_generatepitch_scratch_lead_analyzer_run",
+      "fromNode": "n_scratch_lead_analyzer_generatepitch",
+      "toNode": "n_scratch_lead_analyzer_run",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_generatepitch_scratch_lead_analyzer",
+      "fromNode": "n_scratch_lead_analyzer_generatepitch",
+      "toNode": "n_scratch_lead_analyzer",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_run_scratch_lead_analyzer_sleep",
+      "fromNode": "n_scratch_lead_analyzer_run",
+      "toNode": "n_scratch_lead_analyzer_sleep",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_run_scratch_lead_analyzer",
+      "fromNode": "n_scratch_lead_analyzer_run",
+      "toNode": "n_scratch_lead_analyzer",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_sleep_scratch_lead_analyzer",
+      "fromNode": "n_scratch_lead_analyzer_sleep",
+      "toNode": "n_scratch_lead_analyzer",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_processlist_scratch_merge_final_leads",
+      "fromNode": "n_scratch_merge_final_leads_processlist",
+      "toNode": "n_scratch_merge_final_leads",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_extractor",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_extractor_gmaps_scraper_server_extractor_rationale_1",
+      "fromNode": "n_gmaps_scraper_server_extractor",
+      "toNode": "n_gmaps_scraper_server_extractor_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_execsync",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_execsync",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_client_localauth_messagemedia",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_client_localauth_messagemedia",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_qrcode",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_qrcode",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_dotenv",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_path",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_fs",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_historyfilepath",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_historyfilepath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_scrapedfilepath",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_scrapedfilepath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_analyzedfilepath",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_analyzedfilepath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_orchestrate_campaign_scratch_orchestrate_campaign_args",
+      "fromNode": "n_scratch_orchestrate_campaign",
+      "toNode": "n_scratch_orchestrate_campaign_args",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sender_scratch_whatsapp_sender_client_localauth",
+      "fromNode": "n_scratch_whatsapp_sender",
+      "toNode": "n_scratch_whatsapp_sender_client_localauth",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sender_scratch_whatsapp_sender_qrcode",
+      "fromNode": "n_scratch_whatsapp_sender",
+      "toNode": "n_scratch_whatsapp_sender_qrcode",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sender_scratch_whatsapp_sender_dotenv",
+      "fromNode": "n_scratch_whatsapp_sender",
+      "toNode": "n_scratch_whatsapp_sender_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sender_scratch_whatsapp_sender_path",
+      "fromNode": "n_scratch_whatsapp_sender",
+      "toNode": "n_scratch_whatsapp_sender_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sender_scratch_whatsapp_sender_client",
+      "fromNode": "n_scratch_whatsapp_sender",
+      "toNode": "n_scratch_whatsapp_sender_client",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_manifest_version",
+      "fromNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_manifest_version",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_name",
+      "fromNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_name",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_ruleset_format",
+      "fromNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_ruleset_format",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_version",
+      "fromNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_subresource_filter_unindexed_rules_9_70_0_manifest_version",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_manifest_version",
+      "fromNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_manifest_version",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_name",
+      "fromNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_name",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_version",
+      "fromNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest",
+      "toNode": "n_scratch_wwebjs_auth_session_certificaterevocation_10676_manifest_version",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_init_gmaps_scraper_server_scraper",
+      "fromNode": "n_gmaps_scraper_server_init",
+      "toNode": "n_gmaps_scraper_server_scraper",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_gmaps_scraper_server_main_api",
+      "fromNode": "n_gmaps_scraper_server_scraper",
+      "toNode": "n_gmaps_scraper_server_main_api",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scratch_scrape_leads",
+      "fromNode": "n_gmaps_scraper_server_scraper",
+      "toNode": "n_scratch_scrape_leads",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scratch_search_clients",
+      "fromNode": "n_gmaps_scraper_server_scraper",
+      "toNode": "n_scratch_search_clients",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_gmaps_scraper_server_scraper_scratch_search_more_clients",
+      "fromNode": "n_gmaps_scraper_server_scraper",
+      "toNode": "n_scratch_search_more_clients",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_path",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_fs",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_execsync",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_execsync",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_client",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_client",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_historyfilepath",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_historyfilepath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_client_localauth_messagemedia",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_client_localauth_messagemedia",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_qrcode",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_qrcode",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_sales_bot_scratch_whatsapp_sales_bot_dotenv",
+      "fromNode": "n_scratch_whatsapp_sales_bot",
+      "toNode": "n_scratch_whatsapp_sales_bot_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_scratch_package_dependencies",
+      "fromNode": "n_scratch_package",
+      "toNode": "n_scratch_package_dependencies",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_scratch_package_dependencies_dotenv",
+      "fromNode": "n_scratch_package_dependencies",
+      "toNode": "n_scratch_package_dependencies_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_scratch_package_dependencies_fluent_ffmpeg",
+      "fromNode": "n_scratch_package_dependencies",
+      "toNode": "n_scratch_package_dependencies_fluent_ffmpeg",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_scratch_package_dependencies_qrcode_terminal",
+      "fromNode": "n_scratch_package_dependencies",
+      "toNode": "n_scratch_package_dependencies_qrcode_terminal",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_scratch_package_dependencies_whatsapp_web_js",
+      "fromNode": "n_scratch_package_dependencies",
+      "toNode": "n_scratch_package_dependencies_whatsapp_web_js",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_dotenv_dotenv",
+      "fromNode": "n_scratch_package_dependencies_dotenv",
+      "toNode": "n_dotenv",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_fluent_ffmpeg_fluent_ffmpeg",
+      "fromNode": "n_scratch_package_dependencies_fluent_ffmpeg",
+      "toNode": "n_fluent_ffmpeg",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_qrcode_terminal_qrcode_terminal",
+      "fromNode": "n_scratch_package_dependencies_qrcode_terminal",
+      "toNode": "n_qrcode_terminal",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_package_dependencies_whatsapp_web_js_whatsapp_web_js",
+      "fromNode": "n_scratch_package_dependencies_whatsapp_web_js",
+      "toNode": "n_whatsapp_web_js",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_client_localauth",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_client_localauth",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_leadspath",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_leadspath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_leads",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_leads",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_qrcode",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_qrcode",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_client",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_client",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_dotenv",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_path",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_whatsapp_bulk_outreach_scratch_whatsapp_bulk_outreach_fs",
+      "fromNode": "n_scratch_whatsapp_bulk_outreach",
+      "toNode": "n_scratch_whatsapp_bulk_outreach_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_scratch_lead_analyzer_fs",
+      "fromNode": "n_scratch_lead_analyzer",
+      "toNode": "n_scratch_lead_analyzer_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_scratch_lead_analyzer_args",
+      "fromNode": "n_scratch_lead_analyzer",
+      "toNode": "n_scratch_lead_analyzer_args",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_scratch_lead_analyzer_path",
+      "fromNode": "n_scratch_lead_analyzer",
+      "toNode": "n_scratch_lead_analyzer_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_lead_analyzer_scratch_lead_analyzer_dotenv",
+      "fromNode": "n_scratch_lead_analyzer",
+      "toNode": "n_scratch_lead_analyzer_dotenv",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_scratch_merge_final_leads_fs",
+      "fromNode": "n_scratch_merge_final_leads",
+      "toNode": "n_scratch_merge_final_leads_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_scratch_merge_final_leads_path",
+      "fromNode": "n_scratch_merge_final_leads",
+      "toNode": "n_scratch_merge_final_leads_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_scratch_merge_final_leads_combinedanalyzedpath",
+      "fromNode": "n_scratch_merge_final_leads",
+      "toNode": "n_scratch_merge_final_leads_combinedanalyzedpath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_scratch_merge_final_leads_dentalindiranagarpath",
+      "fromNode": "n_scratch_merge_final_leads",
+      "toNode": "n_scratch_merge_final_leads_dentalindiranagarpath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_merge_final_leads_scratch_merge_final_leads_hsranalyzedpath",
+      "fromNode": "n_scratch_merge_final_leads",
+      "toNode": "n_scratch_merge_final_leads_hsranalyzedpath",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_combine_scrapes_scratch_combine_scrapes_fs",
+      "fromNode": "n_scratch_combine_scrapes",
+      "toNode": "n_scratch_combine_scrapes_fs",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_combine_scrapes_scratch_combine_scrapes_allleads",
+      "fromNode": "n_scratch_combine_scrapes",
+      "toNode": "n_scratch_combine_scrapes_allleads",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_combine_scrapes_scratch_combine_scrapes_seenphones",
+      "fromNode": "n_scratch_combine_scrapes",
+      "toNode": "n_scratch_combine_scrapes_seenphones",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_combine_scrapes_scratch_combine_scrapes_path",
+      "fromNode": "n_scratch_combine_scrapes",
+      "toNode": "n_scratch_combine_scrapes_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_scratch_combine_scrapes_scratch_combine_scrapes_files",
+      "fromNode": "n_scratch_combine_scrapes",
+      "toNode": "n_scratch_combine_scrapes_files",
+      "label": "contains [EXTRACTED]"
+    }
+  ]
+}

@@ -2,22 +2,19 @@
 version: '3.8'
 
 services:
+  # 1. Google Maps Scraper API Service
   scraper-api:
-    build: . # Build the image from the Dockerfile in the current directory
-    container_name: gmaps_scraper_api_service # Optional: specify a container name
+    build: .
+    container_name: gmaps_scraper_api_service
     ports:
-      - "8001:8001" # Map host port 8001 to container port 8001
-    restart: unless-stopped # Restart policy
-    working_dir: /app # Set working directory
+      - "8001:8001"
+    restart: unless-stopped
+    working_dir: /app
     networks:
       - shark
-    # Tmpfs mounts to keep temporary files in RAM
     tmpfs:
       - /tmp:size=512M
       - /dev/shm:size=2G
-    # Optional: Add environment variables if needed for configuration
-    # environment:
-    #   - HEADLESS_MODE=true
     cpu_shares: 512
     cpuset: "0"
     deploy:
@@ -26,8 +23,44 @@ services:
           cpus: '1'
           memory: 3G
 
-# Create the external network first with:
-# docker network create shark
+  # 2. PostgreSQL Database (Free Lead & Consent Tracking)
+  postgres:
+    image: postgres:15-alpine
+    container_name: gmaps_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: n8n_user
+      POSTGRES_PASSWORD: n8n_password
+      POSTGRES_DB: gmaps_leads
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shark
+
+  # 3. n8n Workflow Orchestrator (100% Free Self-Hosted)
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: gmaps_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - shark
+
 networks:
   shark:
-    external: true
+    driver: bridge
+
+volumes:
+  postgres_data:
+  n8n_data:
+

@@ -1,0 +1,20 @@
+# CLIENTFINDER v3 test image (Docker-based validation, no MS-Store python needed).
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# Test-only image: install everything needed to import main_api + run pytest.
+# Playwright is required at import time by gmaps_scraper_server.scraper.
+RUN pip install --no-cache-dir \
+        playwright \
+        fastapi \
+        uvicorn \
+        pytest \
+        httpx
+
+COPY . .
+
+CMD ["pytest", "-v"]

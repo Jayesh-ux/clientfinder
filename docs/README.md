@@ -219,3 +219,180 @@ The scraper has been refactored to prioritize **stable, semantic selectors** ove
 - **Reviews URL deprecated**: The `reviews_url` field returns a URL that no longer works (404 error) as of 2026
 - For alternatives, consider using Google's official Places API for review access (requires API key and has usage costs)
 # google-map-scraper
+
+## CLIENTFINDER v3: Dynamic Capability Catalog
+
+CLIENTFINDER v3 adds a flexible, dynamic capability catalog to the existing scraper + CRM pipeline. It maps business problems to candidate solutions using skills and verified portfolio evidence — **without** locking you into predefined service categories.
+
+> **Validation status:** the full loop has been proven end-to-end — see
+> "Proven end-to-end" below. What's more, **matching is now need-driven and
+> niche-agnostic**: only observed symptoms (no website, phone-only booking,
+> attendance gaps, manual stock, …) select the offering. Full test suite: **31/31 passing**.
+
+### Quick start (local)
+
+Requires Python 3.11+ and the deps in `requirements-dev.txt`. Browsers for the
+scraper are handled automatically: on Windows it prefers an installed
+Chrome/Edge, else `python -m playwright install chromium`.
+
+```bash
+# 1. Apply migrations + seed the catalog (creates/upgrades pipeline/crm.db)
+python pipeline/migrate.py --seed
+
+# 2. Scrape real prospects from Google Maps (offline-friendly, headless)
+python pipeline/run_scrape.py "dental clinic near me" --max 20 --out pipeline/leads_scraped.json
+
+# 3. Bridge scrape JSON -> v2 leads CSV -> import into pipeline/crm.db
+python pipeline/scrape_to_leads.py pipeline/leads_scraped.json    # run from pipeline/
+
+# 4. Match every lead against the catalog (need-driven)
+cd pipeline && python match_leads.py
+
+# 5. Run the API (catalog + offerings + existing scrape endpoints on :8001)
+uvicorn gmaps_scraper_server.main_api:app --reload
+```
+
+### Quick start (Docker-based validation)
+
+```bash
+docker build -f Dockerfile.test -t clientfinder-test .
+docker run --rm clientfinder-test        # runs pytest suite
+```
+
+### Key ideas
+
+- **capabilities** — skills/capabilities with a `verification_level`
+  (`verified_industry` | `verified_project` | `familiarity` | `unvalidated`) so
+  nothing is over-claimed.
+- **portfolio_evidence** — real projects with provenance + verified flag; only
+  the current repository is auto-marked verified.
+- **solution_templates** — reusable "what I can build" blueprints composed of
+  capabilities + evidence.
+- **problem_patterns** — business pain points with match keywords mapped to
+  solution templates. The `/catalog/match` endpoint discovers candidates from
+  free text (lead context, business description, chat message).
+- Fully customizable: add capabilities/solutions/patterns via the API.
+
+### Catalog API (mounted under `/catalog`)
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/catalog/capabilities` | list capabilities |
+| POST | `/catalog/capabilities` | add capability |
+| GET | `/catalog/match?text=...` | match business problem → solutions |
+| GET/POST | `/catalog/evidence` | portfolio evidence |
+| GET/POST | `/catalog/solutions` | solution templates |
+| GET/POST | `/catalog/patterns` | problem patterns |
+
+Each resource also supports `GET /{id}`, `PATCH /{id}`, `DELETE /{id}`.
+
+### Example match
+
+```bash
+curl "http://localhost:8001/catalog/match?text=part%20of%20the%20team%20is%20remote%20on%20site%20and%20we%20need%20attendance%20and%20time%20tracking"
+```
+
+Returns ranked solution templates (e.g. `realtime-tracking-dashboard`) with the
+capability slugs and evidence behind each match. Add `&include_score=true` to
+attach a fit-scorecard (`need_fit`, `scale_fit`, `urgency`,
+`evidence_confidence`, total + tier) to each candidate.
+
+### Match CRM leads against the catalog
+
+```bash
+# Matches every lead in pipeline/crm.db -> writes lead_matches + lead_scores
+python pipeline/match_leads.py
+
+# One lead, dry-run (compute only, no writes)
+python pipeline/match_leads.py --lead-id lead-abc --dry-run
+```
+
+API equivalents: `GET /catalog/leads/{lead_id}/match` and
+`GET /catalog/leads/{lead_id}/matches`. The v2 `leads` table is **never
+modified** — matches/scores land in the additive 0002 tables.
+
+### Offerings & outreach (what we can actually sell)
+
+`service_catalog/offerings.py` is the "sellable" layer: each catalog solution
+gets a concrete **gig** (deliverables), a **SaaS variant**, and a
+**personalized outreach draft** (angle + openers + hooks). It is
+niche-agnostic by design — mapped to symptoms, not industries.
+
+- `GET /offerings` — full list (15 offerings) with deliverables + SaaS angles.
+- `GET /offerings/{slug}` — the angle/template for one offering.
+- `GET /offerings/{slug}/draft?business=...&area=...` — **DRAFT ONLY** outreach
+  body for a specific prospect, with high-entropy variation (each render picks a
+  different opener/hook combo) to avoid message fingerprinting.
+- Nothing served under `/offerings` ever sends anything.
+
+```bash
+curl "localhost:8001/offerings/inventory-stock-automation/draft?business=Acme%20Store&area=Delhi"
+curl localhost:8001/offerings
+```
+
+Offering coverage is intentionally broad so "what we can sell" stays open:
+lead-gen automation, digital presence + booking, custom web apps, hiring/
+onboarding platforms, AI-assisted tools, inventory automation, billing/payments,
+retention & referrals, multi-location ops, scheduling/rosters, document
+management, customer-comms automation, reports/dashboards, field-service jobs,
+and realtime tracking dashboards.
+
+### Proven end-to-end (offline demo)
+
+The complete client-finder loop has been exercised against real modules and a
+real `pipeline/crm.db`:
+
+1. **Scrape** — a live headless scrape of `"dental clinic near me"` via
+   `pipeline/run_scrape.py` returned 5 real Pune clinics (name, category,
+   website, phone, address, rating, review count) and saved them to
+   `pipeline/leads_scraped.json`. `gmaps_scraper_server.extractor` runs on
+   the live page; earlier, it was also proven standalone on a saved HTML sample.
+2. **Import** — records from both the live scrape (5 clinics) and the earlier
+   sample page became leads via `pipeline/scrape_to_leads.py`
+   (scrape JSON → v2 CSV) then `pipeline/import_leads.py` into the `leads`
+   table (8 businesses total: dental clinics, salon, interior studio, cafe,
+   construction — a deliberately cross-niche mix).
+3. **Catalog** — `pipeline/migrate.py --seed` applied the 0001–0003 migrations
+   and seeded capabilities/solutions/patterns (with provenance tiers).
+4. **Match & score** — `pipeline/match_leads.py` matched all leads with
+   observable symptoms and wrote `lead_matches` + `lead_scores`. Cross-niche
+   proof: construction site with attendance gaps matched
+   `realtime-tracking-dashboard`; a lead with no website matched
+   `digital-presence-booking`; stock problems matched inventory automation —
+   always the right offering for the **symptom**, never the niche. Every match
+   carries a readable `explanation`.
+5. **Draft** — personalized outreach drafts were generated per matched lead from
+   `service_catalog/offerings.render_outreach` (business name + area injected,
+   varied openers/hooks). Sending was refused until (a) approved by an operator
+   AND (b) the account had `send_enabled=1`; the final refusal was DNS on a fake
+   SMTP host, never a bypass. Inbound stays read-only and draft-only.
+6. **Serve** — `uvicorn gmaps_scraper_server.main_api:app` booted cleanly with
+   the catalog mounted; `GET /catalog/match` returned the correct top solution.
+
+### Email subsystem (draft-only by default)
+
+Safety contract: **nothing is ever sent automatically.** A draft must be
+`approved` by an operator AND the linked account must have `send_enabled=1`;
+credentials come from the environment (`CF_SMTP_PASSWORD`, `CF_IMAP_PASSWORD`)
+and are never stored in the repo or DB.
+
+```bash
+# accounts
+curl -X POST localhost:8001/email/accounts \
+  -d '{"name":"Work","smtp_host":"smtp.example.com","smtp_port":587,"smtp_user":"me@x.com","from_email":"me@x.com","imap_host":"imap.example.com","imap_port":993,"imap_user":"me@x.com"}'
+curl -X POST "localhost:8001/email/accounts/1/enable?enabled=true"
+
+# drafts
+curl -X POST localhost:8001/email/drafts -d '{"subject":"Hi","body":"...","account_id":1}'
+curl -X POST localhost:8001/email/drafts/bulk -d '{"items":[...]}'
+curl -X POST localhost:8001/email/drafts/1/approve
+curl -X POST localhost:8001/email/drafts/1/send      # refuses until enabled
+
+# inbound (never auto-replies)
+curl -X POST localhost:8001/email/inbox/pull?account_id=1
+curl localhost:8001/email/inbox
+```
+
+See [CLIENTFINDER_V3_PHASE0_INSPECTION.md](CLIENTFINDER_V3_PHASE0_INSPECTION.md)
+for the full Phase 0 report (architecture, dependency map, migration plan,
+implementation sequence, risk register).

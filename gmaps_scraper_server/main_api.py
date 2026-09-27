@@ -22,6 +22,27 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# CLIENTFINDER v3: attach the dynamic capability catalog API (additive, v2 endpoints untouched)
+try:
+    from service_catalog.router import router as catalog_router
+    app.include_router(catalog_router)
+except Exception as e:  # pragma: no cover - service_catalog is best-effort
+    logging.warning(f"Could not mount CLIENTFINDER catalog API: {e}")
+
+# CLIENTFINDER v3: email subsystem (draft-only by default)
+try:
+    from service_catalog.email_router import router as email_router
+    app.include_router(email_router)
+except Exception as e:  # pragma: no cover - email subsystem is best-effort
+    logging.warning(f"Could not mount CLIENTFINDER email API: {e}")
+
+# CLIENTFINDER v3: offerings & outreach drafts (human-in-the-loop, draft-only)
+try:
+    from service_catalog.offerings_router import router as offerings_router
+    app.include_router(offerings_router)
+except Exception as e:  # pragma: no cover - offerings is best-effort
+    logging.warning(f"Could not mount CLIENTFINDER offerings API: {e}")
+
 @app.post("/scrape", response_model=List[Dict[str, Any]])
 async def run_scrape(
     query: str = Query(..., description="The search query for Google Maps (e.g., 'restaurants in New York')"),

@@ -64,8 +64,14 @@ scratch/
 
 # Database files & lead data
 pipeline/crm.db
+pipeline/crm.db.bak-*
 pipeline/*.csv
 pipeline/queue_tracker.json
+
+# Scraped business data (contains public PII — never commit)
+pipeline/*_businesses.json
+pipeline/leads_scraped.json
+pipeline/leads_from_scrape.json
 
 # Tool generated outputs
 graphify-out/

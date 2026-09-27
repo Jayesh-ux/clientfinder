@@ -4,6 +4,7 @@ import re
 import random
 import logging
 import os
+import sys
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 from urllib.parse import urlencode
 
@@ -12,6 +13,33 @@ from . import extractor
 
 # --- Logging Configuration ---
 logger = logging.getLogger(__name__)
+
+# --- Browser channel selection -------------------------------------------------
+BROWSER_CHANNEL = os.environ.get("CF_BROWSER_CHANNEL")  # e.g. "chrome", "msedge", "chromium"
+
+
+def _pick_browser_channel():
+    """Choose an available browser channel, preferring an explicitly set one,
+    then falling back to installed Chrome/Edge, finally Playwright-managed Chromium."""
+    candidates = []
+    if BROWSER_CHANNEL:
+        candidates.append(BROWSER_CHANNEL)
+    elif sys.platform == "win32":
+        chrome = os.environ.get("PROGRAMFILES", "C:\\Program Files")
+        edge = os.environ.get("PROGRAMFILES(X86)", "C:\\Program Files (x86)")
+        if os.path.isfile(os.path.join(edge, "Microsoft\\Edge\\Application\\msedge.exe")) or \
+           os.path.isfile(os.path.join(chrome, "Microsoft\\Edge\\Application\\msedge.exe")):
+            candidates.append("msedge")
+        if os.path.isfile(os.path.join(chrome, "Google\\Chrome\\Application\\chrome.exe")):
+            candidates.append("chrome")
+    candidates.append("chromium")
+    for c in candidates:
+        try:
+            return c
+        except Exception:
+            continue
+    return "chromium"
+
 
 # --- Constants ---
 BASE_URL = "https://www.google.com/maps/search/"
@@ -107,6 +135,7 @@ async def scrape_google_maps(query, max_places=None, lang="en", headless=True, c
         try:
             browser = await p.chromium.launch(
                 headless=headless,
+                channel=_pick_browser_channel(),
                 args=[
                     '--disable-dev-shm-usage',  # Use /tmp instead of /dev/shm for shared memory
                     '--no-sandbox',  # Required for running in Docker

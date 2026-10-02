@@ -1,6 +1,4 @@
-**ROHIT SHANKARRAM JAISWAR** 
-
-[Email](mailto:rohit.s.jaiswar@gmail.com): rohit.s.jaiswar@gmail.com | Phone number: 8286996458 | [GitHub](http://github.com/Rohitjaiswar123) | [LinkedIn](https://www.linkedin.com/in/rohitjaiswar-dev/)
+**[Contact details removed — personal PII scrubbed before publishing]**
 
 **PROFESSIONAL SUMMARY** 
 

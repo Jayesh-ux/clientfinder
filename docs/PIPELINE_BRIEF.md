@@ -1,7 +1,7 @@
-# Bengaluru Local Client Prospecting Pipeline — Rohit Jaiswar
+# Bengaluru Local Client Prospecting Pipeline
 
 ## Goal
-Build a compliant prospect research and consent-first WhatsApp outreach pipeline for my freelance full-stack / AI automation services. I am based in Bengaluru, PIN 560043 (HRBR Layout / HBR Layout / Kalyan Nagar / Kammanahalli area).
+Build a compliant prospect research and consent-first WhatsApp outreach pipeline for freelance full-stack / AI automation services. Bengaluru, PIN 560043. (Founder contact details scrubbed for publish.)
 
 My target outcome:
 1. Find relevant local service businesses from permitted sources.
@@ -21,15 +21,7 @@ IMPORTANT:
 - Use rate limits and human approval before any outbound message is sent.
 
 ## Founder / service provider
-Name: Rohit Shankarram Jaiswar
-Location: Bengaluru, Karnataka, India — 560043
-Email: rohit.s.jaiswar@gmail.com
-Phone: +91 8286996458
-GitHub: https://github.com/Rohitjaiswar123
-LinkedIn: https://www.linkedin.com/in/rohitjaiswar-dev/
-Portfolio: https://portfolio-next-js-chi-beryl.vercel.app/
-ClockHustle: https://www.clockhustle.com/
-CrashCall: https://crashcall.life/?i=1
+Contact details scrubbed for publish (name, email, phone removed from the public copy).
 
 ## Positioning
 I help Bengaluru service businesses convert more enquiries into paying customers using:
@@ -284,7 +276,7 @@ For every lead, save:
   "niche": "",
   "lead_score": 0,
   "priority": "P1",
-  "owner_assigned": "Rohit",
+  "owner_assigned": "founder",
   "website_status": "unknown",
   "mobile_experience": "unknown",
   "page_speed_observation": "",
@@ -377,7 +369,7 @@ Initial outreach sequence:
 3. Ask permission before sending any detail or audit on WhatsApp.
 4. Once the business gives explicit permission, save opt-in evidence.
 5. Only then send WhatsApp messages through an approved method.
-6. Every WhatsApp message must identify Rohit / his business and include a simple opt-out line.
+6. Every WhatsApp message must identify the service provider / the business and include a simple opt-out line.
 7. If they say “no,” “stop,” “not interested,” or equivalent, mark do_not_contact = true and stop immediately.
 
 ## Suggested technical architecture

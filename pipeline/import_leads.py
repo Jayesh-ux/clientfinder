@@ -3,8 +3,9 @@ import csv
 import sys
 import uuid
 from datetime import datetime
+from pathlib import Path
 
-DB_PATH = 'crm.db'
+DB_PATH = str(Path(__file__).resolve().parent / 'crm.db')
 
 def import_csv(csv_path):
     conn = sqlite3.connect(DB_PATH)

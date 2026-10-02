@@ -40,12 +40,27 @@ DEFAULT_COLUMNS = [
 ]
 
 
+KNOWN_CITIES = {
+    "Mumbai", "Navi Mumbai", "Thane", "Pune", "Bengaluru", "Gurgaon", "Delhi",
+    "Hyderabad", "Chennai", "Ahmedabad", "Panvel", "Vashi", "Nerul", "Belapur",
+    "Kharghar", "Kamothe", "Airoli", "Ghansoli", "Bhiwandi", "Taloja", "Mankoli",
+    "Bombay",
+}
+
+
 def parse_city_from_address(address: str) -> str:
     if not address:
         return ""
+    if "Navi Mumbai" in address:
+        return "Navi Mumbai"
     for part in address.split(", "):
-        if "Pune" in part or "Mumbai" in part or "Bengaluru" in part or "Gurgaon" in part or "Delhi" in part:
+        part = part.strip()
+        if part in KNOWN_CITIES:
             return part
+    if "Mumbai" in address:
+        return "Mumbai"
+    if "Thane" in address:
+        return "Thane"
     return ""
 
 
@@ -55,6 +70,18 @@ def to_row(b: dict) -> dict:
     address = (b.get("address") or "").strip()
     city = (b.get("city") or "").strip() or parse_city_from_address(address)
     name = (b.get("name") or "").strip()
+
+    extra = {}
+    for key in ("place_id", "coordinates", "categories", "rating", "reviews_count",
+                "reviews_url", "hours", "thumbnail", "link"):
+        val = b.get(key)
+        if val:
+            extra[key] = val
+
+    notes = "auto-imported from run_scrape.py"
+    if extra:
+        notes += "; " + json.dumps(extra, ensure_ascii=False)
+
     return {
         "business_name": name,
         "business_category": (b.get("category") or "").strip(),
@@ -67,7 +94,7 @@ def to_row(b: dict) -> dict:
         "extraction_method": "automated_scrape",
         "website_status": "live" if website else "none",
         "seo_observation": "no website found" if not website else "website found",
-        "notes": "auto-imported from run_scrape.py",
+        "notes": notes,
     }
 
 

@@ -13,32 +13,51 @@ limits. All lead import stays inside this repo — nothing is emailed out.
 import argparse
 import asyncio
 import json
+import logging
+import random
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from gmaps_scraper_server import scraper  # noqa: E402
 
+logger = logging.getLogger("run_scrape")
+
 
 def _clean_business(b: dict) -> dict:
-    """Normalize a scraper record into CLIENTFINDER import shape."""
+    """Normalize a scraper record into CLIENTFINDER import shape.
+
+    Keeps the full extractor detail (place_id, coordinates, categories,
+    hours, thumbnail, reviews_url) so per-lead intelligence survives, not
+    just the 8 core import fields.
+    """
     phone = (b.get("phone_number") or b.get("phone") or "").strip()
+    ratings = (b.get("categories") or []) if not isinstance(b.get("categories"), str) else [b["categories"]]
     return {
         "name": (b.get("title") or b.get("name") or "Unknown").strip(),
         "category": (b.get("category") or (b.get("categories") or [""])[0] or "").strip(),
+        "categories": ratings,
         "website": (b.get("website") or "").strip(),
         "phone": phone,
         "address": (b.get("address") or "").strip(),
         "city": (b.get("city") or "").strip(),
+        "place_id": b.get("place_id"),
+        "coordinates": b.get("coordinates"),
         "rating": b.get("rating"),
         "reviews_count": b.get("reviews_count"),
+        "reviews_url": b.get("reviews_url"),
+        "hours": b.get("hours"),
+        "thumbnail": b.get("thumbnail"),
+        "link": b.get("link"),
     }
 
 
-async def _run(query: str, max_places: int) -> list:
+async def _run(query: str, max_places: int, browser, context) -> list:
     print(f"[scrape] query={query!r} max={max_places}", flush=True)
-    return await scraper.scrape_google_maps(query, max_places=max_places, headless=True)
+    return await scraper.scrape_with_browser(
+        query, browser, context, max_places=max_places)
 
 
 def main():
@@ -46,6 +65,8 @@ def main():
     ap.add_argument("query", nargs="?", help="single maps query")
     ap.add_argument("--queries-file", help="file with one query per line")
     ap.add_argument("--max", type=int, default=10)
+    ap.add_argument("--delay", type=float, default=3.0, help="seconds between queries to stay under Maps rate limits")
+    ap.add_argument("--concurrency", type=int, default=3, help="parallel detail tabs per query")
     ap.add_argument("--out", default="pipeline/leads_scraped.json")
     args = ap.parse_args()
 
@@ -60,15 +81,37 @@ def main():
     out_path = Path(__file__).resolve().parent.parent / args.out
 
     all_businesses = []
-    for q in queries:
-        try:
-            raw = asyncio.run(_run(q, args.max))
-        except Exception as exc:  # browser/network failures are non-fatal
-            print(f"[scrape] FAILED for {q!r}: {exc}", flush=True)
-            continue
-        cleaned = [_clean_business(b) for b in raw if isinstance(b, dict)]
-        print(f"[scrape] {q!r}: {len(cleaned)} businesses", flush=True)
-        all_businesses.extend(cleaned)
+
+    async def scrape_all():
+        from playwright.async_api import async_playwright
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(
+                headless=True,
+                channel=None,
+                args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox'],
+            )
+            try:
+                context = await browser.new_context(
+                    user_agent=random.choice(scraper.USER_AGENTS),
+                    java_script_enabled=True,
+                    accept_downloads=False,
+                    locale="en",
+                )
+                for i, q in enumerate(queries):
+                    try:
+                        raw = await _run(q, args.max, browser, context)
+                    except Exception as exc:
+                        print(f"[scrape] FAILED for {q!r}: {exc}", flush=True)
+                        continue
+                    cleaned = [_clean_business(b) for b in raw if isinstance(b, dict)]
+                    print(f"[scrape] {q!r}: {len(cleaned)} businesses", flush=True)
+                    all_businesses.extend(cleaned)
+                    if i < len(queries) - 1 and args.delay > 0:
+                        time.sleep(args.delay)
+            finally:
+                await browser.close()
+
+    asyncio.run(scrape_all())
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(all_businesses, ensure_ascii=False, indent=2), encoding="utf-8")

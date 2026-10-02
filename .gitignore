@@ -63,15 +63,27 @@ docs/.obsidian/
 scratch/
 
 # Database files & lead data
+crm.db
 pipeline/crm.db
 pipeline/crm.db.bak-*
 pipeline/*.csv
 pipeline/queue_tracker.json
+pipeline/send_queue.json
+pipeline/test_single.json
 
 # Scraped business data (contains public PII — never commit)
 pipeline/*_businesses.json
+pipeline/scrape_*.json
 pipeline/leads_scraped.json
 pipeline/leads_from_scrape.json
+
+# Outreach artifacts containing contact PII
+pipeline/lead_dossiers.md
+pipeline/phone_call_targets.md
+
+# Run logs / error captures
+pipeline/*.out
+pipeline/*.err
 
 # Tool generated outputs
 graphify-out/

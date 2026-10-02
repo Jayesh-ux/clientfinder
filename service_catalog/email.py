@@ -71,10 +71,11 @@ def create_draft(data):
     try:
         cur = conn.execute(
             "INSERT INTO email_drafts (lead_id, solution_slug, account_id, subject,"
-            " body, status, send_after, tags) VALUES (?, ?, ?, ?, ?, 'draft', ?, ?)",
+            " body, html_body, status, send_after, tags) VALUES (?, ?, ?, ?, ?, ?,"
+            " 'draft', ?, ?)",
             (data.get("lead_id"), data.get("solution_slug"), data.get("account_id"),
-             data["subject"], data["body"], data.get("send_after"),
-             data.get("tags")))
+             data["subject"], data["body"], data.get("html_body"),
+             data.get("send_after"), data.get("tags")))
         conn.commit()
         return dict(conn.execute("SELECT * FROM email_drafts WHERE id = ?",
                                  (cur.lastrowid,)).fetchone())
@@ -180,7 +181,10 @@ def send_draft(draft_id, secret_smtp_password=None):
     msg["Subject"] = row["subject"]
     msg["From"] = f'{row["from_name"] or "CLIENTFINDER"} <{row["from_email"] or ""}>'
     msg["To"] = to_addr
-    msg.set_content(row["body"])
+    if row.get("html_body"):
+        msg.set_content(row["html_body"], subtype="html")
+    else:
+        msg.set_content(row["body"])
 
     try:
         context = ssl.create_default_context()

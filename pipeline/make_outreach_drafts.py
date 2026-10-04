@@ -20,7 +20,7 @@ from html_email_builder import build_html_body  # noqa: E402
 
 ACC_ID = next(a["id"] for a in list_accounts() if a["from_email"] == "hsinghjayesh@gmail.com")
 SIGN = ("Jayesh Singh\n+91 78218 16193 | hsinghjayesh@gmail.com\n"
-        "hire2onboard.com | github.com/Jayesh-ux | linkedin.com/in/jayesh-dev | jayesh-ux.github.io/jayesh-singh")
+        "github.com/Jayesh-ux | linkedin.com/in/jayesh-dev | jayesh-ux.github.io/jayesh-singh")
 
 CAT = {
     "Salon": "salon", "Beauty Parlour": "salon", "Hairdresser": "salon", "Day spa": "spa",

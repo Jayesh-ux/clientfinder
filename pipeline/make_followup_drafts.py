@@ -31,7 +31,7 @@ from client_framing import frame_lead  # noqa: E402
 from html_email_builder import build_html_body  # noqa: E402
 
 SIGN = ("Jayesh Singh\n+91 78218 16193 | hsinghjayesh@gmail.com\n"
-        "hire2onboard.com | github.com/Jayesh-ux | linkedin.com/in/jayesh-dev | jayesh-ux.github.io/jayesh-singh")
+        "github.com/Jayesh-ux | linkedin.com/in/jayesh-dev | jayesh-ux.github.io/jayesh-singh")
 ACC_ID = next(a["id"] for a in list_accounts() if a["from_email"] == "hsinghjayesh@gmail.com")
 
 TOUCH_LABEL = ["followup-1", "followup-2", "followup-3", "followup-4"]

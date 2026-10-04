@@ -26,7 +26,6 @@ SIGNATURE_ROLE = "Full-stack developer | booking & enquiry systems for local bus
 CONTACT_ITEMS = [
     ("email", "hsinghjayesh@gmail.com"),
     ("phone", "+91 78218 16193"),
-    ("url", "hire2onboard.com"),
     ("url", "github.com/Jayesh-ux"),
     ("url", "linkedin.com/in/jayesh-dev"),
     ("url", "jayesh-ux.github.io/jayesh-singh"),

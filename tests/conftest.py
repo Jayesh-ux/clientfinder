@@ -23,6 +23,11 @@ def init_db_connected(db_path):
     dbmod.get_db_path = lambda: db_path  # override resolution per-test-setup
     from pipeline import migrate as mig
     mig.DEFAULT_DB_PATH = db_path
+    # Base leads schema comes from pipeline/init_db.py; migrations build on top
+    # of it (same order as SETUP.md), so create it before applying migrations.
+    from pipeline import init_db
+    init_db.DB_PATH = str(db_path)
+    init_db.init_db()
     mig.migrate(db_path)
     from service_catalog.seed import seed
     seed()

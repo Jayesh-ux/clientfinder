@@ -1,6 +1,12 @@
 import sqlite3
+import sys
+from pathlib import Path
 
-DB_PATH = 'crm.db'
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from service_catalog.config import get_db_path  # noqa: E402
+
+DB_PATH = str(get_db_path())
 
 messages = {
     "Eva Esthetic": """Hi Dr. Eva team, I'm Rohit, a local developer in Bengaluru. 

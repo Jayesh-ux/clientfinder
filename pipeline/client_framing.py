@@ -218,14 +218,32 @@ def frame_lead(row):
     if rating:
         project = f"premium {project}" if float(rating) >= 4.6 else project
 
-    try:
-        first = name.split()[0]
-    except Exception:
-        first = name or "there"
+    # NEVER derive a personal name from the business name. "Fresh Look Salon"
+    # -> "Fresh", "Sri Balaji Dental Studio" -> "Sri", "Greenfield Interior"
+    # -> "Greenfield" reads as a mail-merge failure and kills the email. Use a
+    # real contact only when we actually have one; otherwise address the business.
+    decision_maker = (_get(row, "decision_maker_name") or "").strip()
+    if decision_maker:
+        first = decision_maker.split()[0].strip(",. ")
+        greet_kind = "person"
+    else:
+        first = ""
+        greet_kind = "business"
+
+    # The job-search emails open with a named contact and a geographic anchor
+    # ("Dear AttoWorks Team, I am... based in Kalyan (W)... applying for your
+    # role in Wagle Estate, Thane"). Local SMB outreach needs the same: address
+    # whoever actually reads it, and show you are nearby.
+    if greet_kind == "person":
+        greeting = f"Dear {decision_maker.split(',')[0].strip()},"
+    else:
+        greeting = f"Hello {name} team,"
 
     return {
         "name": name,
         "first": first,
+        "greet_kind": greet_kind,
+        "greeting": greeting,
         "cat": cat,
         "area": area,
         "problem": problem,

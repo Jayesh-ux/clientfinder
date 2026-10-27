@@ -16,6 +16,13 @@ logger = logging.getLogger(__name__)
 
 # --- Browser channel selection -------------------------------------------------
 BROWSER_CHANNEL = os.environ.get("CF_BROWSER_CHANNEL")  # e.g. "chrome", "msedge", "chromium"
+# Explicit browser binary, bypassing Playwright's managed-download lookup. Needed on
+# machines where a Chromium build already exists but its revision differs from the
+# one this Playwright version expects (e.g. a shared ~/.cache/ms-playwright).
+BROWSER_EXECUTABLE = os.environ.get("CF_BROWSER_EXECUTABLE") or None
+# Connect to external browser via CDP (e.g., obscura). If set, we do NOT launch
+# a local Chromium instance.
+CDP_ENDPOINT = os.environ.get("CF_CDP_ENDPOINT") or os.environ.get("OBSCURA_CDP") or None
 
 
 def _pick_browser_channel():
@@ -27,6 +34,9 @@ def _pick_browser_channel():
     """
     if BROWSER_CHANNEL:
         return BROWSER_CHANNEL
+    # "chromium" (not None) is deliberate: with channel=None Playwright prefers
+    # its separate headless-shell build, which an externally supplied binary
+    # never provides. channel="chromium" runs the full build in new headless.
     return "chromium"
 
 
@@ -114,50 +124,43 @@ async def scrape_with_browser(query, browser, context, max_places=None, lang="en
     # --- Step 1: Navigate to Google Maps and perform search ---
     page = await context.new_page()
 
-    # Navigate to Google Maps homepage first (more natural, avoids sidebar issues)
-    logger.info("Navigating to Google Maps homepage...")
-    await page.goto('https://www.google.com/maps', wait_until='domcontentloaded')
-    await asyncio.sleep(random_delay(2.0, 3.0))  # Give page time to fully load
-
-    # Find and use the search box
-    logger.info(f"Typing search query: {query}")
+    # Navigate directly to search results URL (more reliable)
+    logger.info(f"Navigating to search: {query}")
     try:
-        # Try multiple search box selectors (Google Maps changes frequently)
-        search_box_selectors = [
-            'input[id="searchboxinput"]',
-            'input[aria-label*="Search"]',
-            'input[placeholder*="Search"]',
-            'input[name="q"]',
-        ]
-
-        search_box = None
-        for selector in search_box_selectors:
-            try:
-                await page.wait_for_selector(selector, state='visible', timeout=5000)
-                search_box = selector
-                logger.debug(f"Found search box with selector: {selector}")
-                break
-            except:
-                continue
-
-        if not search_box:
-            logger.error("Could not find search box on Google Maps")
+        from urllib.parse import quote_plus
+        search_url = f'https://www.google.com/maps/search/{quote_plus(query)}?hl={lang}'
+        await page.goto(search_url, wait_until='domcontentloaded', timeout=60000)
+        await asyncio.sleep(random_delay(3.0, 4.0))
+    except Exception as e:
+        logger.warning(f"Direct search failed, trying homepage: {e}")
+        try:
+            await page.goto('https://www.google.com/maps', wait_until='domcontentloaded')
+            await asyncio.sleep(random_delay(2.0, 3.0))
+            search_box_selectors = [
+                'input[id="searchboxinput"]',
+                'input[aria-label*="Search"]',
+                'input[placeholder*="Search"]',
+            ]
+            search_box = None
+            for selector in search_box_selectors:
+                try:
+                    await page.wait_for_selector(selector, state='visible', timeout=5000)
+                    search_box = selector
+                    break
+                except:
+                    continue
+            if not search_box:
+                logger.error("Could not find search box on Google Maps")
+                await page.close()
+                return []
+            await page.fill(search_box, query)
+            await asyncio.sleep(random_delay(0.5, 1.0))
+            await page.keyboard.press('Enter')
+            await asyncio.sleep(random_delay(2.0, 3.0))
+        except Exception as e2:
+            logger.error(f"Error performing search: {e2}")
             await page.close()
             return []
-
-        # Type the query into the search box
-        await page.fill(search_box, query)
-        await asyncio.sleep(random_delay(0.5, 1.0))
-
-        # Press Enter to submit search
-        await page.keyboard.press('Enter')
-        logger.info("Search submitted, waiting for results...")
-        await asyncio.sleep(random_delay(2.0, 3.0))
-
-    except Exception as e:
-        logger.error(f"Error performing search: {e}")
-        await page.close()
-        return []
 
     # --- Handle potential consent forms ---
     try:
@@ -278,21 +281,30 @@ async def scrape_google_maps(query, max_places=None, lang="en", headless=True, c
 
     async with async_playwright() as p:
         try:
-            browser = await p.chromium.launch(
-                headless=headless,
-                channel=_pick_browser_channel(),
-                args=[
-                    '--disable-dev-shm-usage',  # Use /tmp instead of /dev/shm for shared memory
-                    '--no-sandbox',
-                    '--disable-setuid-sandbox',
-                ]
-            )
-            context = await browser.new_context(
-                user_agent=random.choice(USER_AGENTS),
-                java_script_enabled=True,
-                accept_downloads=False,
-                locale=lang,
-            )
+            if CDP_ENDPOINT:
+                logger.info(f"Connecting to external browser via CDP: {CDP_ENDPOINT}")
+                browser = await p.chromium.connect_over_cdp(CDP_ENDPOINT)
+            else:
+                browser = await p.chromium.launch(
+                    headless=headless,
+                    channel=_pick_browser_channel(),
+                    executable_path=BROWSER_EXECUTABLE,
+                    args=[
+                        '--disable-dev-shm-usage',  # Use /tmp instead of /dev/shm for shared memory
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                    ]
+                )
+            # Reuse existing context if connecting over CDP
+            if CDP_ENDPOINT and browser.contexts:
+                context = browser.contexts[0]
+            else:
+                context = await browser.new_context(
+                    user_agent=random.choice(USER_AGENTS),
+                    java_script_enabled=True,
+                    accept_downloads=False,
+                    locale=lang,
+                )
             results = await scrape_with_browser(
                 query, browser, context, max_places=max_places,
                 lang=lang, concurrency=concurrency,
@@ -303,7 +315,9 @@ async def scrape_google_maps(query, max_places=None, lang="en", headless=True, c
             logger.error(f"An error occurred during scraping: {e}", exc_info=True)
         finally:
             if browser and browser.is_connected():
-                await browser.close()
+                if not CDP_ENDPOINT:
+                    await browser.close()
+                # When using CDP we don't close the external browser
 
     logger.info(f"Scraping finished. Found details for {len(results)} places.")
     return results

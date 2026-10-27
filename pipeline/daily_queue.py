@@ -2,9 +2,15 @@ import sqlite3
 import datetime
 import json
 import os
+import sys
+from pathlib import Path
 
-DB_PATH = 'crm.db'
-TRACKER_PATH = 'queue_tracker.json'
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from service_catalog.config import PIPELINE_DIR, get_db_path  # noqa: E402
+
+DB_PATH = str(get_db_path())
+TRACKER_PATH = str(PIPELINE_DIR / "queue_tracker.json")
 
 def load_tracker():
     if os.path.exists(TRACKER_PATH):

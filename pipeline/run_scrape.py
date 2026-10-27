@@ -1,8 +1,8 @@
 """Run a real Google Maps scrape and pipe results into the CLIENTFINDER pipeline.
 
 Usage (from repo root):
-    python pipeline/run_scrape.py "dentist near me" --max 20 --out pipeline/leads_scraped.json
-    python pipeline/run_scrape.py --queries-file queries.txt --max 10 --out pipeline/mix.json
+    python pipeline/run_scrape.py "dentist near me" --max 20
+    python pipeline/run_scrape.py --queries-file queries.txt --max 10 --out data/raw/mix.json
 
 The output JSON matches the shape consumed by pipeline/import_leads.py (which can
 also import a raw CSV from the v2 scraper server). Network/browser availability
@@ -20,6 +20,8 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from service_catalog.config import RAW_DIR, ensure_data_dirs  # noqa: E402
 
 from gmaps_scraper_server import scraper  # noqa: E402
 
@@ -67,7 +69,8 @@ def main():
     ap.add_argument("--max", type=int, default=10)
     ap.add_argument("--delay", type=float, default=3.0, help="seconds between queries to stay under Maps rate limits")
     ap.add_argument("--concurrency", type=int, default=3, help="parallel detail tabs per query")
-    ap.add_argument("--out", default="pipeline/leads_scraped.json")
+    ap.add_argument("--out", default=None,
+                    help="output JSON (default: data/raw/leads_scraped.json)")
     args = ap.parse_args()
 
     queries = []
@@ -78,7 +81,14 @@ def main():
     if not queries:
         raise SystemExit("no query given")
 
-    out_path = Path(__file__).resolve().parent.parent / args.out
+    ensure_data_dirs()
+    if args.out:
+        out_path = Path(args.out)
+        if not out_path.is_absolute():
+            out_path = Path(__file__).resolve().parent.parent / out_path
+    else:
+        out_path = RAW_DIR / "leads_scraped.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
     all_businesses = []
 
@@ -88,6 +98,7 @@ def main():
             browser = await p.chromium.launch(
                 headless=True,
                 channel=None,
+                executable_path=scraper.BROWSER_EXECUTABLE,
                 args=['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox'],
             )
             try:

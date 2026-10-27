@@ -62,14 +62,26 @@ docs/.obsidian/
 # Scratch folder (contains local credentials, API keys, sessions, dependencies, and temporary data)
 scratch/
 
+# Local venv
+.venv/
+venv/
+env/
+
 # Database files & lead data
 crm.db
 pipeline/crm.db
 pipeline/crm.db.bak-*
 pipeline/*.csv
 pipeline/queue_tracker.json
+pipeline/harvest_progress.json
 pipeline/send_queue.json
 pipeline/test_single.json
+
+# Working data dirs (raw scrapes, outreach artifacts — contain public PII)
+data/raw/*
+data/outreach/*
+!data/raw/.gitkeep
+!data/outreach/.gitkeep
 
 # Scraped business data (contains public PII — never commit)
 pipeline/*_businesses.json

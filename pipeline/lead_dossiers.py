@@ -11,9 +11,14 @@ Usage (from repo root):
 import argparse
 import json
 import sqlite3
+import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent / "crm.db"
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from service_catalog.config import OUTREACH_DIR, get_db_path  # noqa: E402
+
+DB_PATH = get_db_path()
 
 SOLUTION_LABELS = {
     "lead-gen-automation": "Lead Generation Automation",
@@ -117,7 +122,8 @@ def format_dossier(rows):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="pipeline/lead_dossiers.md")
+    ap.add_argument("--out", default=None,
+                    help="output markdown (default: data/outreach/lead_dossiers.md)")
     ap.add_argument("--min-score", type=int, default=1)
     args = ap.parse_args()
 
@@ -125,7 +131,12 @@ def main():
     rows = fetch_leads(conn, args.min_score)
     doc = format_dossier(rows)
 
-    out = Path(__file__).resolve().parent.parent / args.out
+    if args.out:
+        out = Path(args.out)
+        if not out.is_absolute():
+            out = Path(__file__).resolve().parent.parent / out
+    else:
+        out = OUTREACH_DIR / "lead_dossiers.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding="utf-8")
     print(f"wrote {len(rows)} dossiers -> {out}")

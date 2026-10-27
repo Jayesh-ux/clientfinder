@@ -13,7 +13,11 @@ import sys
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-DB = Path(__file__).resolve().parent / "crm.db"
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from service_catalog.config import RAW_DIR, ensure_data_dirs, get_db_path  # noqa: E402
+
+DB = get_db_path()
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 BAD_EMAIL = re.compile(
     r"example|sentry|wixpress|godaddy|godaddysites|jotform|typeform|squarespace|"
@@ -29,7 +33,8 @@ CTX.check_hostname = False
 CTX.verify_mode = ssl.CERT_NONE
 
 MAX_LEADS = 160
-PROGRESS = Path(__file__).resolve().parent / "harvest_progress.json"
+ensure_data_dirs()
+PROGRESS = RAW_DIR / "harvest_progress.json"
 
 
 def norm_url(u):

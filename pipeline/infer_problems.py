@@ -13,9 +13,14 @@ Fields written (only when there is evidence):
   booking_observation         - manual booking by phone / calls for every booking
   conversion_observation      - no online presence found, customers cannot find us online
   social_activity_observation - review/rating momentum not leveraged online
+  lead_problem / why_they_pay_us - derived framing (migration 0005), from
+                               pipeline/problem_framing.py
 
 Usage:
-    python pipeline/infer_problems.py [--dry-run]
+    python pipeline/infer_problems.py [--dry-run] [--all]
+
+--all also frames leads that were not scraped from Google Maps (CSV imports,
+seeded clinics). Framing is idempotent, so re-running is safe.
 """
 
 import argparse
@@ -24,7 +29,14 @@ import sqlite3
 import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent / "crm.db"
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from problem_framing import lead_problem, lead_why  # noqa: E402
+from service_catalog.config import get_db_path  # noqa: E402
+
+DB_PATH = get_db_path()
 
 PHONE_ONLY = "no online booking", "cannot book online", "bookings by phone", "manual booking"
 NO_PRESENCE = "no online presence", "customers cannot find us online", "no website"
@@ -80,35 +92,56 @@ def infer_for(row):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--all", action="store_true",
+                    help="also frame every lead, not just scraped ones")
     args = ap.parse_args()
 
     conn = sqlite3.connect(str(DB_PATH))
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA busy_timeout = 30000")
+    where = "" if args.all else " WHERE source_type = 'google_maps_scrape'"
     rows = conn.execute(
-        "SELECT lead_id, website_url, website_status, public_business_phone,"
-        " notes FROM leads WHERE source_type = 'google_maps_scrape'"
+        "SELECT * FROM leads" + where
     ).fetchall()
 
+    has_framing = conn.execute(
+        "SELECT 1 FROM pragma_table_info('leads') WHERE name = 'lead_problem'"
+    ).fetchone() is not None
+
     changed = 0
+    framed = 0
     for row in rows:
-        if (row["website_status"] or "").lower() == "live":
-            continue
-        updates = infer_for(row)
-        if not updates:
-            continue
+        updates = {}
+        if not args.all and (row["website_status"] or "").lower() == "live":
+            updates = infer_for(row)
+            if not updates:
+                continue
+        elif args.all:
+            updates = infer_for(row)
+
+        if has_framing:
+            updates["lead_problem"] = lead_problem(row)
+            updates["why_they_pay_us"] = lead_why(row)
+
         if args.dry_run:
             print(f"# {row['lead_id'][:8]} : {updates}")
             continue
-        sets = ", ".join(f"{k} = ?" for k in updates)
-        conn.execute(
-            f"UPDATE leads SET {sets} WHERE lead_id = ?",
-            list(updates.values()) + [row["lead_id"]],
-        )
-        changed += 1
+        if updates:
+            sets = ", ".join(f"{k} = ?" for k in updates)
+            conn.execute(
+                f"UPDATE leads SET {sets} WHERE lead_id = ?",
+                list(updates.values()) + [row["lead_id"]],
+            )
+            changed += 1
+        if has_framing:
+            framed += 1
 
     conn.commit()
     conn.close()
-    print(f"{'would update (dry-run)' if args.dry_run else 'updated'}: {changed} leads")
+    verb = "would update (dry-run)" if args.dry_run else "updated"
+    print(f"{verb}: {changed} leads")
+    if has_framing:
+        print(f"lead_problem / why_they_pay_us framed on {framed} leads")
 
 
 if __name__ == "__main__":

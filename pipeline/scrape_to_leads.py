@@ -9,15 +9,19 @@ Usage (from repo root):
 """
 
 import csv
-import sys
+import hashlib
 import json
+import re
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from import_leads import import_csv  # noqa: E402
+from service_catalog.config import RAW_DIR, ensure_data_dirs  # noqa: E402
 
-CSV_PATH = "pipeline/leads_from_scrape.csv"
+CSV_NAME = "leads_from_scrape.csv"
 DEFAULT_COLUMNS = [
     "lead_id", "business_name", "business_category", "sub_category", "city", "area",
     "pincode", "address_public", "website_url", "instagram_url", "facebook_url",
@@ -64,6 +68,30 @@ def parse_city_from_address(address: str) -> str:
     return ""
 
 
+def stable_lead_id(b: dict) -> str:
+    """Deterministic lead id so re-importing a scrape cannot duplicate a lead.
+
+    Place id is Google's own unique key and survives re-scrapes. Phone and then
+    name+address are fallbacks for records without one. A random uuid here would
+    let the same business in twice, which means two outreach drafts for one
+    recipient — exactly the duplicate-email failure we must never ship.
+    """
+    place_id = (b.get("place_id") or "").strip()
+    if place_id:
+        return "gm_" + hashlib.sha1(place_id.encode("utf-8")).hexdigest()[:16]
+    phone = re.sub(r"\D", "", b.get("phone") or "")
+    # The same number gets written many ways across scrape sources (+91 X, 0X,
+    # X with spaces). Normalise to the bare 10-digit NSN so all forms collide
+    # onto one lead instead of becoming repeat outreach targets.
+    if phone.startswith("91") and len(phone) == 12:
+        phone = phone[2:]
+    phone = phone.lstrip("0")
+    if phone:
+        return "gm_p" + hashlib.sha1(phone.encode("utf-8")).hexdigest()[:16]
+    seed = f"{(b.get('name') or '').strip().lower()}|{(b.get('address') or '').strip().lower()}"
+    return "gm_n" + hashlib.sha1(seed.encode("utf-8")).hexdigest()[:16]
+
+
 def to_row(b: dict) -> dict:
     website = (b.get("website") or "").strip()
     phone = (b.get("phone") or "").strip()
@@ -83,6 +111,7 @@ def to_row(b: dict) -> dict:
         notes += "; " + json.dumps(extra, ensure_ascii=False)
 
     return {
+        "lead_id": stable_lead_id(b),
         "business_name": name,
         "business_category": (b.get("category") or "").strip(),
         "city": city,
@@ -99,13 +128,19 @@ def to_row(b: dict) -> dict:
 
 
 def main():
-    if len(sys.argv) < 2:
+    ensure_data_dirs()
+    args = [a for a in sys.argv[1:] if a != "--"]
+    if not args:
         raise SystemExit("Usage: python pipeline/scrape_to_leads.py <scraped.json>")
-    src = Path(sys.argv[1])
+    src = Path(args[0])
+    if not src.is_absolute() and not src.exists():
+        fallback = RAW_DIR / src.name
+        if fallback.exists():
+            src = fallback
     businesses = json.loads(src.read_text(encoding="utf-8"))
     rows = [to_row(b) for b in businesses]
 
-    csv_path = Path(__file__).resolve().parent.parent / CSV_PATH
+    csv_path = RAW_DIR / CSV_NAME
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=DEFAULT_COLUMNS, extrasaction="ignore")
         writer.writeheader()

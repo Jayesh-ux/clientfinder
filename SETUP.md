@@ -12,10 +12,10 @@ HTML-styled outreach/follow-up emails (drafts) → operator approves → send vi
 
 ## 1. Prerequisites
 
-- Python **3.10+** (tested on 3.12, Windows)
+- Python **3.10+** (tested on 3.12 Windows, 3.13 Linux/Termux arm64)
 - A Gmail account with an **App Password** (for SMTP + IMAP).
   Enable 2FA → Google Account → Security → App passwords → generate one.
-- Node.js **18+** (needed only by `gmaps_scraper_server`).
+- Node.js **18+** (only for the n8n/compose side; the scraper itself is Python).
 
 ---
 
@@ -31,8 +31,16 @@ python -m venv .venv
 # mac/Linux:
 source .venv/bin/activate
 
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 playwright install chromium
+```
+
+Already have a Chromium build on the machine? Skip the 190 MB download and point
+Playwright at it instead (revision mismatches are the usual reason `playwright
+install` is skipped):
+
+```bash
+echo 'CF_BROWSER_EXECUTABLE=/path/to/chrome' >> .env
 ```
 
 Run the test suite to confirm the machine is ready:
@@ -45,59 +53,87 @@ python -m pytest -q
 
 ## 3. Secrets (`.env`)
 
-Copy this into `.env` at the repo root. `.env` is git-ignored — never commit it.
+Copy `.env.example` to `.env` at the repo root. `.env` is git-ignored — never
+commit it.
 
 ```
 CF_SMTP_PASSWORD=your_gmail_app_password
 CF_IMAP_PASSWORD=your_gmail_app_password
+CF_BROWSER_EXECUTABLE=/optional/path/to/chrome
 ```
 
-The DB path defaults to `pipeline/crm.db`. Override with `CLIENTFINDER_DB_PATH`
-if you want a different location. The same Gmail app password works for SMTP
-(send) and IMAP (inbound).
+`.env` is loaded automatically by `service_catalog/config.py`, so every script
+and the API see the same values. The DB path defaults to `pipeline/crm.db`;
+override with `CLIENTFINDER_DB_PATH`. The same Gmail app password works for
+SMTP (send) and IMAP (inbound).
+
+Working directories (git-ignored, auto-created):
+
+| Path               | Holds                                                        |
+|--------------------|--------------------------------------------------------------|
+| `data/raw/`        | scrape JSON, import CSVs, harvest progress                  |
+| `data/outreach/`   | `lead_dossiers.md`, `all_leads_export.csv`, call lists       |
 
 ---
 
 ## 4. First run — create the schema + mailbox
 
 ```bash
-python pipeline/init_db.py        # creates tables if missing
-python pipeline/migrate.py        # applies any pending migrations
+python pipeline/init_db.py        # creates the leads table if missing
+python pipeline/migrate.py --seed # applies migrations + seeds the catalog
 ```
 
-Seed the outreach mailbox (account id 3, `send_enabled=1`) and set your gmail:
+Register the mailbox the draft generators send from (the generators look it up
+by `from_email`, so this must exist before step 7):
 
 ```bash
-python pipeline/seed_new_leads.py --help   # see available seeding options
+python pipeline/setup_mailbox.py --email you@gmail.com --name "Your Name"
+python pipeline/setup_mailbox.py --list
 ```
 
-> To register your own Gmail as the outreach account, use
-> `service_catalog.email.create_account(...)` with `send_enabled=1`, from email
-> `hsinghjayesh@gmail.com` (used by `make_outreach_drafts.py` /
-> `make_followup_drafts.py` via `list_accounts()`), or edit those scripts' `ACC_ID`.
+Use `--disable-send` to register it with `send_enabled=0` (drafts only, nothing
+can send). Flip it later with
+`python pipeline/setup_mailbox.py --email you@gmail.com`.
+
+Optionally seed the demo clinic leads:
+
+```bash
+python pipeline/seed_new_leads.py
+```
+
+> The draft generators pick their account by `from_email`, so register the
+> mailbox you want them to use (default in the scripts:
+> `hsinghjayesh@gmail.com`).
 
 ---
 
 ## 5. Find leads
 
 ### 5a. Scrape Google Maps (optional)
-Queries live in `pipeline/queries_*.txt` (one query per line). Run against the
-local scraper server, or reuse the saved scrape outputs:
+Queries live in `pipeline/queries_*.txt` (one query per line).
 
 ```bash
-python pipeline/run_scrape.py --help
-python pipeline/scrape_to_leads.py            # import saved scrapes into leads table
+python pipeline/run_scrape.py "dentist in Kalyan" --max 20
+python pipeline/run_scrape.py --queries-file pipeline/queries_mumbai.txt --max 10
 ```
 
-Saved scrapes (`pipeline/scrape_kalyan.json`, `scrape_mumbai.json`) are committed
-in the repo as examples — they contain **public PII** and are git-ignored going
-forward; your own scrapes should stay ignored too.
+Output lands in `data/raw/leads_scraped.json` (override with `--out`). Import it:
 
-Alternatively import from a CSV with `pipeline/import_leads.py`.
+```bash
+python pipeline/scrape_to_leads.py leads_scraped.json
+```
+
+Alternatively import a raw CSV with `pipeline/import_leads.py`, or call the
+API server instead of the CLI:
+
+```bash
+uvicorn gmaps_scraper_server.main_api:app --host 127.0.0.1 --port 8001
+curl "http://127.0.0.1:8001/scrape-get?query=dentist%20in%20Kalyan&max_places=20"
+```
 
 ### 5b. Harvest emails (optional, fills gaps)
 ```bash
-python pipeline/harvest_emails.py             # 160 leads/round, resumes via pipeline/harvest_progress.json
+python pipeline/harvest_emails.py             # 160 leads/round, resumes via data/raw/harvest_progress.json
 ```
 
 ---
@@ -106,7 +142,9 @@ python pipeline/harvest_emails.py             # 160 leads/round, resumes via pip
 
 ```bash
 python pipeline/match_leads.py                # scores each lead against solutions -> lead_matches / lead_scores
-python pipeline/infer_problems.py             # computes lead_problem + why_they_pay_us columns
+python pipeline/infer_problems.py --all       # observations + lead_problem / why_they_pay_us columns
+python pipeline/update_problem_columns.py     # data/outreach/all_leads_export.csv
+python pipeline/lead_dossiers.py              # data/outreach/lead_dossiers.md
 ```
 
 ---
@@ -142,11 +180,7 @@ The account must have `send_enabled=1` and `CF_SMTP_PASSWORD` must be set.
 Send a single draft:
 
 ```python
-import os
-from pathlib import Path
-for line in Path(".env").read_text().splitlines():
-    k, _, v = line.partition("="); os.environ.setdefault(k.strip(), v.strip())
-from service_catalog.email import approve_draft, send_draft
+from service_catalog.email import approve_draft, send_draft  # loads .env for you
 approve_draft(123)                 # the draft id
 print(send_draft(123))
 ```
@@ -166,10 +200,7 @@ Replies are never auto-answered. Fetch + store them:
 
 ```python
 import os
-from pathlib import Path
-for line in Path(".env").read_text().splitlines():
-    k, _, v = line.partition("="); os.environ.setdefault(k.strip(), v.strip())
-from service_catalog.email import fetch_inbox, list_accounts
+from service_catalog.email import fetch_inbox, list_accounts  # loads .env for you
 for a in list_accounts():
     if a["send_enabled"]:
         print(a["id"], fetch_inbox(a["id"], os.environ["CF_IMAP_PASSWORD"]))
@@ -209,13 +240,25 @@ answers arrive after 2–4 touches, and tracking the funnel (inbox replies + CRM
 - **Gmail rejects auth**: regenerate the App Password; it must match `.env`.
 - **SMTP timeouts mid-batch**: transient — retry failed ids only (they stay
   `approved`); never resend already-`sent` rows.
+- **`make_outreach_drafts.py` raises `StopIteration`**: no mailbox registered.
+  Run `python pipeline/setup_mailbox.py --email you@gmail.com`.
+- **Migration fails with `no such table: leads`**: run `pipeline/init_db.py`
+  first — migrations build on the base schema it creates.
+- **`no such column: lead_problem`**: DB predates migration 0005; run
+  `python pipeline/migrate.py`.
+- **Scraper exits with "Executable doesn't exist"**: the Playwright-managed
+  Chromium revision is missing. Either `playwright install chromium` or set
+  `CF_BROWSER_EXECUTABLE` in `.env` to a Chromium already on the machine.
+- **Scrape returns `[]` with "Feed element not found"**: Google served a
+  consent/anti-bot page. Retry, lower `--concurrency`, or raise `--delay`.
 
 ---
 
 ## 12. What is NOT committed (git-ignored)
 
-`crm.db` and backups, `.env`, `*.csv`, `pipeline/*_businesses.json`,
+`crm.db` and backups, `.env`, `.venv/`, `*.csv`, `pipeline/*_businesses.json`,
 `pipeline/scrape_*.json`, `send_queue.json`, `queue_tracker.json`,
+`harvest_progress.json`, everything under `data/raw/` and `data/outreach/`,
 `lead_dossiers.md`, `phone_call_targets.md`, `*.out`, `*.err`.
 
 Your live lead data stays local. To move a working DB to another machine, copy

@@ -22,9 +22,14 @@ import textwrap
 from datetime import datetime, timedelta
 from pathlib import Path
 
-PIPE = Path(__file__).resolve().parent if "__file__" in locals() else Path(r"C:\Users\hsing\clientfinder-v3\pipeline")
+PIPE = Path(__file__).resolve().parent
 ROOT = PIPE.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(PIPE))
+
+from service_catalog.config import get_db_path  # noqa: E402
+
+DB_PATH = str(get_db_path())
 
 from service_catalog.email import create_draft, list_accounts  # noqa: E402
 from client_framing import frame_lead  # noqa: E402
@@ -88,20 +93,31 @@ def render(tmpl, **kw):
 
 def build_body(touch, f):
     name = f["name"]
-    first = f["first"]
+    # `{first}` in these templates means "the person we are emailing". It is
+    # only safe when we have a real contact name - never a word cut from the
+    # business name ("Fresh Look Salon" -> "Fresh"). Fall back to addressing
+    # the business.
+    first = f.get("first") or f"{name} team"
     rating = f"{f['rating']}" if f["rating"] else "top"
     reviews = f"{f['reviews']}" if f["reviews"] else "strong"
 
     solution = f["solution"]
-    if solution.lower().startswith(("a ", "an ", "the ")):
+    if solution.lower().startswith(("a ", "an", "the ")):
         solution = solution.split(" ", 1)[1]
 
-    # NEW proof point anchored to the frame, different on every touch.
-    site = f.get("website_status")
-    if f["project"] == "new build":
-        proof = f"Right now {name} isn't reachable from a local Google search - the enquiry window is fully offline."
+    # Proof must be TRUE and checkable against the listing we scraped. Claiming
+    # "not reachable from a local Google search" to a business with 1000+ Google
+    # reviews is factually wrong and reads as a template - the reader spots the
+    # mismatch instantly and stops trusting the rest.
+    has_site = bool(f.get("website_status")) or bool(f.get("has_site"))
+    if not has_site and f.get("reviews"):
+        proof = (f"{name} ranks on Google with {f['reviews']} reviews, "
+                 f"but there is no site behind it - every enquiry lands as a call.")
+    elif not has_site:
+        proof = f"{name} has no site at all, so every enquiry has to arrive as a phone call."
     else:
-        proof = f"{name} ranks on reviews but the funnel stops at a phone number."
+        proof = (f"{name} has the review reputation but the funnel stops at a phone number "
+                 f"while you're with a customer.")
     deadline = (datetime.now() + timedelta(days=5)).strftime("%d %b")
 
     if touch == 0:
@@ -132,7 +148,7 @@ def main():
     ap.add_argument("--no-update-crm", action="store_true")
     args = ap.parse_args()
 
-    c = sqlite3.connect(str(PIPE / "crm.db"), timeout=30)
+    c = sqlite3.connect(DB_PATH, timeout=30)
     c.row_factory = sqlite3.Row
     c.execute("PRAGMA busy_timeout=30000")
 
@@ -170,7 +186,8 @@ def main():
 
         subject = f"{TOUCH_PREFIX[t]} {r['last_sent_subject']}".strip()
         body = build_body(t, f)
-        html_body = build_html_body(f, subject, body, business_email=r["public_business_email"] or "")
+        html_body = build_html_body(f, subject, body, business_email=r["public_business_email"] or "",
+                                 phone=r["public_business_phone"] or "")
 
         d = create_draft({
             "lead_id": r["lead_id"],

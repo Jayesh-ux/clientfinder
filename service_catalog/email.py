@@ -198,6 +198,82 @@ def send_draft(draft_id, secret_smtp_password=None):
         return {"sent": False, "error": str(e), "draft_id": draft_id}
 
 
+def send_draft_gmail(draft_id):
+    """Send ONE approved draft through the Gmail API (OAuth2).
+
+    Same gates as send_draft(), different transport: the SMTP path needs an app
+    password (CF_SMTP_PASSWORD) this environment does not have, while OAuth2
+    already carries gmail.send. Refuses unless status='approved' and the
+    account has send_enabled=1.
+    """
+    conn = connect()
+    try:
+        row = conn.execute(
+            "SELECT d.*, a.from_name, a.from_email, a.send_enabled,"
+            " l.public_business_email, l.lead_id, l.business_name"
+            " FROM email_drafts d"
+            " LEFT JOIN email_accounts a ON a.id = d.account_id"
+            " LEFT JOIN leads l ON l.lead_id = d.lead_id"
+            " WHERE d.id = ?", (draft_id,)).fetchone()
+    finally:
+        conn.close()
+    row = row_to_dict(row)
+    if row is None:
+        return {"sent": False, "error": "draft not found", "draft_id": draft_id}
+    if row["status"] != "approved":
+        return {"sent": False, "error": "draft must be approved first",
+                "draft_id": draft_id}
+    if not row.get("send_enabled"):
+        return {"sent": False, "error": "account send not enabled",
+                "draft_id": draft_id}
+    to_addr = row.get("public_business_email")
+    if not to_addr:
+        return {"sent": False, "error": "no public email on the linked lead",
+                "draft_id": draft_id}
+
+    from service_catalog import gmail_oauth
+    result = gmail_oauth.send_message(
+        to_addr=to_addr,
+        subject=row.get("subject") or "",
+        html_body=row.get("html_body") or "",
+        plain_body=row.get("body") or "",
+        from_name=row.get("from_name") or "",
+        from_email=row.get("from_email") or "",
+    )
+    if not result.get("sent"):
+        return {"sent": False, "error": result.get("error"), "draft_id": draft_id}
+
+    mark_sent_from_draft(None, draft_id)
+    _record_sent(row, to_addr)
+    return {"sent": True, "error": None, "draft_id": draft_id,
+            "message_id": result.get("message_id")}
+
+
+def _record_sent(row, to_addr):
+    """Stamp the lead as contacted so the next run cannot double-hit it."""
+    lead_id = row.get("lead_id")
+    if not lead_id:
+        return
+    conn = connect()
+    try:
+        conn.execute(
+            "UPDATE leads SET"
+            # NULLIF: scraped rows carry '' not NULL, so COALESCE alone would
+            # leave outreach_stage/response_status blank and a later run would
+            # treat a contacted lead as untouched.
+            " outreach_stage = CASE WHEN COALESCE(NULLIF(outreach_stage,''),'') = ''"
+            "                       THEN 'contacted' ELSE outreach_stage END,"
+            " last_contacted_at = datetime('now'),"
+            " followup_count = COALESCE(NULLIF(followup_count, NULL), 0) + 1,"
+            " response_status = CASE WHEN COALESCE(NULLIF(response_status,''),'') = ''"
+            "                        THEN 'no_reply' ELSE response_status END,"
+            " updated_at = datetime('now')"
+            " WHERE lead_id = ?", (lead_id,))
+        conn.commit()
+    finally:
+        conn.close()
+
+
 # ---------------------------------------------------------------- imap (inbound)
 
 def fetch_inbox(account_id, secret_imap_password=None, verify_ssl=True):
